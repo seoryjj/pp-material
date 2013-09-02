@@ -109,4 +109,47 @@
 [실습 제출](http://ropas.snu.ac.kr/~ta/4190.210/13/lab/) 페이지에서
 1번으로 `helloWorld.racket` 파일을 제출하세요.
 
+## 도구 ##
+
+실습에 꼭 필요한 도구들은 아니지만, 좋은 프로그래머로 성장하기 위해
+필수적인 도구들을 소개합니다.
+
+### 버전 관리 시스템 ###
+
+[버전 관리 시스템](http://en.wikipedia.org/wiki/Revision_control)이란
+문서의 변경 사항을 저장, 검색, 관리하기 위한 도구입니다. 프로그래밍에
+사용하는 경우, 다음과 같은 일을 할 수 있습니다.
+
+* 프로그램의 기능을 새로 구현하여 넣기
+* 새로 구현한 기능이 버그가 많은 것을 발견하고, 다시 빼기
+* `file.racket`이 어떻게 변경되었는지 보기
+* 3일 전으로부터 코드가 얼마나 변경되었는지 확인하기
+* 실수로 삭제한 파일 되돌리기
+* ...
+
+조금만 복잡한 프로젝트를 진행하는 경우, 버전 관리는
+필수적입니다. 프로그래밍의 원리 실습자료도 버전 관리되고 있습니다 :-)
+유명한 버전 관리 시스템은 다음과 같은 것들이 있습니다.
+
+* [Git](http://www.git-scm.com): 조교들이 사용하는 도구입니다. 셋중
+  가장 기능이 강력합니다.
+  + [Git 간편 안내서](http://rogerdudler.github.io/git-guide/index.ko.html)
+  + [Git from the bottom up](https://www.google.co.kr/search?client=safari&rls=en&q=git+from+bottom+up&ie=UTF-8&oe=UTF-8&gws_rd=cr&ei=06ckUqKJGYXAkAX1jYAw):
+  Git 뿐만아니라 버전 관리 시스템에 대한 이해를 돕는 문서입니다. 다소
+  난이도가 있습니다.
+* [Mercurial](http://mercurial.selenic.com)
+* [Subversion](http://subversion.tigris.org)
+
+### 편집기 ###
+
+지금 당장 꼭 Emacs나 Vim을 쓸 필요는 없습니다. 하지만 프로그래밍을
+계속 할 경우, 손에 익은 편집기를 찾는건 중요합니다.
+
+* [Emacs](http://www.gnu.org/s/emacs/): 조교들은 Emacs를 사용하고
+  있습니다. 이 문서도 Emacs로 작성되었습니다 :-)
+* [Vim](http://www.vim.org)
+* [UltraEdit](http://www.ultraedit.com)
+* ...
+
 고생하셨습니다!
+
