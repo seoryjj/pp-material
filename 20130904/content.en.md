@@ -1,4 +1,4 @@
-# 프로그래밍의 원리 실습 #
+# Practice Session, Principles of Programming #
 
 4th Sep. 2013 (Wed) 16:00-17:50  
 TA [Sungkeun Cho](http://ropas.snu.ac.kr/~skcho),
