@@ -43,7 +43,7 @@ and [Ocaml](http://caml.inria.fr). We will start with Racket.
 * You will do the labwork.
 * If you have a question, ask to TAs.
 * Grade the answer by yourself with self-grader (presented by TAs).
-* If the self-grade says correct, submit the answer at the
+* If the self-grader says correct, submit the answer at the
   [labwork submission](http://ropas.snu.ac.kr/~ta/4190.210/13/lab/)
   page.
   + **Submit here** except for extraordinary
@@ -87,25 +87,29 @@ it.
 ### Hello, World! ###
 
 Today, you will write down a program which write down "Hello, World!".
-As it is the first day, TAs provided the [solution](helloWorld.racket)
+As it is the first day, TAs provided the [solution](helloWorld.rkt)
 :-)  
 You're not required to understand this program for now.
 
+* The link above points to not the file itself but a page on the
+file. If you click "Raw" in the page, you will get the file itself.
+
 #### Self-grader ####
 
-Download [self-grade](helloWorldGrade.racket) and put it at the same
-directory with `helloWorld.racket`. TODO
+Download [self-grader](helloWorldGrade.rkt) and put it at the same
+directory with `helloWorld.rkt`. Open `helloWorldGrade.rkt` and run
+it. If an `O` comes out, you succeeded in self-grading!
 
-* Filename should be `helloWorld.racket` or grader won't work. In
+* Filename should be `helloWorld.rkt` or grader won't work. In
   Linux, you should match the cases.
-* You may run in the command line:
-`TODO`  
+* You may run in the command line by:
+`racket helloWorldGrade.rkt`  
 
 
 #### Submission ####
 
 At [Labwork submission](http://ropas.snu.ac.kr/~ta/4190.210/13/lab/)
-page, submit `helloWorld.racket` as No. 1.
+page, submit `helloWorld.rkt` as No. 1.
 
 ## Tools ##
 
