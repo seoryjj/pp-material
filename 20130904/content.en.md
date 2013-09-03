@@ -29,36 +29,39 @@ Q&A. If you want to ask on course materials, please do here.
   + **Important**: All students should sign on the board by their
   **real name**.
 * [Lab materials](http://www.github.com/lunaticas/pp-material):
-  All lab materials are stored here. We will provide links from
+  All lab materials are stored here. TAs will provide links from
   the TA page and the board, so you don't have to look at it.
 
-### Lab Language ###
+### Used Language ###
 
 * In lab session, you will use [Racket](http://racket-lang.org)
 and [Ocaml](http://caml.inria.fr). We will start with Racket.
 
 ### Lab Session ###
 
+#### Lab Team ####
+
+* We will organize teams each of which consists of 3-4 students.
+* Members are not changed during this class, except for extraordinary
+  cases.
+  
+#### Lab Session Procedure ####
+
 * TAs will give you materials.
-* You will do the labwork.
-* If you have a question, ask to TAs.
-* Grade the answer by yourself with self-grader (presented by TAs).
-* If the self-grader says correct, submit the answer at the
-  [labwork submission](http://ropas.snu.ac.kr/~ta/4190.210/13/lab/)
-  page.
-  + **Submit here** except for extraordinary
-  circumstances. Especially, don't submit via email.
-* If you submit no later than 24hrs after the lab session, you
-  will get 100% of your score. There might be a minus if you submit
-  later than 24hrs.
-  + If you submit multiple times, only the last one is counted
-  for. For example, if you submitted an answer 18hrs after the
-  lab session and another answer 30 hrs after, only the latter is
-  effective.
+* You will do the labwork with your team members.
+* If you have a question, ask to fellow team members. If the issue is
+  not resolved in the team, ask to TAs.
+* If you write down the your answer, grade the answer by yourself with
+  self-grader (presented by TAs).
+* If the self-grader says correct for all your team members, AND all
+your team members understood the material well, ask TAs.
+* After TAs check your team, you may leave :-)
+  + TAs will check thoroughly if all team members understood well!
 
-### Homeworks and Projects ###
+### Homework ###
 
-* TAs will give you self-graders for homeworks and projects.
+* You will do your homework by yourself (homework is not a team assignment).
+* TAs will give you self-graders for homework and projects.
   + Self-graders are only for testing input/output formats, and real
   grading is not performed by this self-graders.
   + Warning: as TAs provide self-graders, **TAs will not give you any
@@ -72,6 +75,9 @@ page.
   the deadline; 80% for 48 hrs.
   + As the same with labwork, the only the lastly submitted answer is
   counted for.
+* TAs will provide actual graders 48hrs after the deadline. After this,
+  you will get 50% of the score if you submit a **correct** answer.
+  + by correct is meant 100% score from the actual grader.
 
 ## Racket ##
 
