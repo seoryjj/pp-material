@@ -1,4 +1,4 @@
-# Practice Session, Principles of Programming #
+# Lab Session, Principles of Programming #
 
 4th Sep. 2013 (Wed) 16:00-17:50  
 TA [Sungkeun Cho](http://ropas.snu.ac.kr/~skcho),
@@ -6,12 +6,12 @@ TA [Sungkeun Cho](http://ropas.snu.ac.kr/~skcho),
 
 ## Introduction ##
 
-Welcome, students of Principles of Programming! In practice session,
+Welcome, students of Principles of Programming! In lab session,
 you are going to grasp hands-on experience on concepts on programming
 you've taught in the lecture session.
 
 ### Time/Place ###
-* Practice session will be at Bldg 302 Rm 311-2 every Wednesday.
+* lab session will be at Bldg 302 Rm 311-2 every Wednesday.
 * TA's office hour is Mon/Wed 15:00-16:00 (right before class). Visit
   at Bldg 302 Rm 312-2 Programming Laboratory.
   + You may visit during the office hour.
@@ -21,26 +21,26 @@ you've taught in the lecture session.
 ### Materials ###
 
 * [Course page](http://ropas.snu.ac.kr/~kwang/4190.210/13/): A page
-  maintained by Prof. Yi. Homeworks, readings, and notices.
+  maintained by Prof. Yi. Homework, readings, and notices.
 * [TA page](http://ropas.snu.ac.kr/~ta/4190.210/13/): A page
-  maintained by TAs. practice sessions and gradings.
+  maintained by TAs. lab sessions and grading.
 * [Board](https://ropas.snu.ac.kr/phpbb/viewforum.php?f=30): Online
 Q&A. If you want to ask on course materials, please do here.
   + **Important**: All students should sign on the board by their
   **real name**.
-* [Practice materials](http://www.github.com/lunaticas/pp-material):
-  All practice materials are stored here. We will provide links from
+* [Lab materials](http://www.github.com/lunaticas/pp-material):
+  All lab materials are stored here. We will provide links from
   the TA page and the board, so you don't have to look at it.
 
-### Practice Language ###
+### Lab Language ###
 
-* In practice session, you will use [Racket](http://racket-lang.org)
+* In lab session, you will use [Racket](http://racket-lang.org)
 and [Ocaml](http://caml.inria.fr). We will start with Racket.
 
-### Practice Session ###
+### Lab Session ###
 
 * TAs will give you materials.
-* You will do the labworks.
+* You will do the labwork.
 * If you have a question, ask to TAs.
 * Grade the answer by yourself with self-grader (presented by TAs).
 * If the self-grade says correct, submit the answer at the
@@ -48,19 +48,17 @@ and [Ocaml](http://caml.inria.fr). We will start with Racket.
   page.
   + **Submit here** except for extraordinary
   circumstances. Especially, don't submit via email.
-* You may leave if you submitted.
-* If you submit no later than 24hrs after the practice session, you
+* If you submit no later than 24hrs after the lab session, you
   will get 100% of your score. There might be a minus if you submit
   later than 24hrs.
   + If you submit multiple times, only the last one is counted
   for. For example, if you submitted an answer 18hrs after the
-  practice session and another answer 30 hrs after, only the latter is
+  lab session and another answer 30 hrs after, only the latter is
   effective.
 
 ### Homeworks and Projects ###
 
-* Prof. Yi gives homeworks and projects.
-* TAs will give you self-graders.
+* TAs will give you self-graders for homeworks and projects.
   + Self-graders are only for testing input/output formats, and real
   grading is not performed by this self-graders.
   + Warning: as TAs provide self-graders, **TAs will not give you any
@@ -68,11 +66,11 @@ and [Ocaml](http://caml.inria.fr). We will start with Racket.
 * Submit homeworks and project at
 [homework submission](http://ropas.snu.ac.kr/~ta/4190.210/13/hw/)
 page.
-  + As the same with labworks, **Submit here** except for
+  + As the same with labwork, **Submit here** except for
   extraordinary circumstances.
 * You get 90% of your score if you submit no later than 24hrs after
   the deadline; 80% for 48 hrs.
-  + As the same with labworks, the only the lastly submitted answer is
+  + As the same with labwork, the only the lastly submitted answer is
   counted for.
 
 ## Racket ##
@@ -82,7 +80,7 @@ page.
 Download [Racket v5.3.6](http://racket-lang.org/download/) and install
 it.
 
-* **Caution**: Use **v5.3.6 버전만** in this class. TAs grade your
+* **Caution**: Use **v5.3.6 only** in this class. TAs grade your
     submissions with this version.
 * Racket is already installed in this room.
 
@@ -116,7 +114,7 @@ Not mandatory but useful.
 ### Revision control ###
 
 * [Git](http://www.git-scm.com)
-  + [Git the simple guilde](http://rogerdudler.github.io/git-guide/index.html)
+  + [Git the simple guide](http://rogerdudler.github.io/git-guide/index.html)
   + [Git from the bottom up](https://www.google.co.kr/search?client=safari&rls=en&q=git+from+bottom+up&ie=UTF-8&oe=UTF-8&gws_rd=cr&ei=06ckUqKJGYXAkAX1jYAw):
 * [Mercurial](http://mercurial.selenic.com)
 * [Subversion](http://subversion.tigris.org)
@@ -127,5 +125,3 @@ Not mandatory but useful.
 * [Vim](http://www.vim.org)
 * [UltraEdit](http://www.ultraedit.com)
 * ...
-
-
