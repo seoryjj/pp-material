@@ -76,8 +76,11 @@ page.
   + As the same with labwork, the only the lastly submitted answer is
   counted for.
 * TAs will provide actual graders 48hrs after the deadline. After this,
-  you will get 50% of the score if you submit a **correct** answer.
+  you will get 50% of reduced score if you submit a **correct** answer
+  in 24hrs after the actual grader provision.
   + by correct is meant 100% score from the actual grader.
+  + ex1) score was 80 and a correct answer was sumitted later: 80 + (20 * 0.5) = 90
+  + ex2) the same with the above except for 24hrs delay: (80 * 0.9) + (20 * 0.5) = 82
 
 ## Racket ##
 
