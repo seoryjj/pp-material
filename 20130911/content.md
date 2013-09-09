@@ -229,30 +229,30 @@ if, equal?, or, and, +, -, *, /, <, quotient, remainder, ...
 ### 과제 ###
 
 * 주어진 수의 부호를 알아내는 함수를 만들어봅시다.
+
 ```racket
 (define (sign x)
     (raise "TODO"))
-
 (sign 0) ; "0"
 (sign 1) ; "+"
 (sign -1) ; "-"
 ```
 
 * 주어진 수의 절대값을 알아내는 함수를 만들어봅시다.
+
 ```racket
 (define (absolut x)
     (raise "TODO"))
-
 (absolut 0) ; 0
 (absolut 1) ; 1
 (absolut -1) ; 1
 ```
 
 * 자연수의 리스트를 받고 리스트에서 가장 큰 수를 찾는 함수를 만들어봅시다.
+
 ```racket
 (define (maxima lst)
     (raise "TODO"))
-
 (maxima '()) ; 0
 (maxima '(1 5 2 4 3)) ; 5
 (maxima '(7 3 1)) ; 7
