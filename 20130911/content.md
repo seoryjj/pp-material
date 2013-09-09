@@ -1,8 +1,7 @@
 # 프로그래밍의 원리 실습 #
 
 2013년 9월 11일 (수) 16:00-17:50
-조교 [조성근](http://ropas.snu.ac.kr/~skcho),
-[강지훈](http://ropas.snu.ac.kr/~jhkang)
+조교 [조성근](http://ropas.snu.ac.kr/~skcho), [강지훈](http://ropas.snu.ac.kr/~jhkang)
 
 ## 실습조 확정 ##
 
