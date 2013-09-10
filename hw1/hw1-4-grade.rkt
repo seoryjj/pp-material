@@ -3,11 +3,21 @@
 (require "common-grade.rkt")
 (require "hw1-4.rkt")
 
-(define (zipperGrade)
-	(begin
-		(printf "zipperGrade\n")
-		(output (equal? '(1 3 2 4) (zipper '(1 2) '(3 4))))
-		(output (equal? '(1 2) (zipper '(1 2) '())))
-		(output (equal? '(1 2) (zipper '() '(1 2))))))
+(define cz 'z)
+(define cp 'p)
+(define cn 'n)
+(define cpz (cons 'p 'z))
+(define cnp (cons 'n 'p))
+(define czn (cons 'z 'n))
 
-(zipperGrade)
+(define (crazy2valGrade)
+	(begin
+		(printf "crazy2val\n")
+		(output (equal? 0 (crazy2val cz)))
+		(output (equal? 1 (crazy2val cp)))
+		(output (equal? -1 (crazy2val cn)))
+		(output (equal? 1 (crazy2val cpz)))
+		(output (equal? 1 (crazy2val cnp)))
+		(output (equal? -2 (crazy2val czn)))))
+
+(crazy2valGrade)

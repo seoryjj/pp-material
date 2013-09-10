@@ -1,6 +1,6 @@
 #lang racket
 
-(provide zipper)
+(provide crazy2val)
 
-(define (zipper lhs rhs)
+(define (crazy2val crazy2)
 	(raise "TODO"))

@@ -1,14 +1,24 @@
 #lang racket
 
 (require "common-grade.rkt")
+(require "hw1-4.rkt")
 (require "hw1-5.rkt")
 
-(define (zipperNGrade)
-	(begin
-		(printf "zipperNGrade\n")
-		(output (equal? '(1 3 5 2 4 6) (zipperN '((1 2) (3 4) (5 6)))))
-		(output (equal? '(1 5 2 6) (zipperN '((1 2) () (5 6)))))
-		(output (equal? '(1 5 2) (zipperN '((1 2) () (5)))))
-		(output (equal? '(3 4) (zipperN '(() (3 4) ()))))))
+(define cz 'z)
+(define cp 'p)
+(define cn 'n)
+(define cpz (cons 'p 'z))
+(define cnp (cons 'n 'p))
+(define czn (cons 'z 'n))
 
-(zipperNGrade)
+(define (crazy2addGrade)
+	(begin
+		(printf "crazy2add\n")
+		(output (equal? (+ (crazy2val cz) (crazy2val cp)) (crazy2val (crazy2add cz cp))))
+		(output (equal? (+ (crazy2val cp) (crazy2val cn)) (crazy2val (crazy2add cp cn))))
+		(output (equal? (+ (crazy2val cn) (crazy2val cpz)) (crazy2val (crazy2add cn cpz))))
+		(output (equal? (+ (crazy2val cpz) (crazy2val cnp)) (crazy2val (crazy2add cpz cnp))))
+		(output (equal? (+ (crazy2val cnp) (crazy2val czn)) (crazy2val (crazy2add cnp czn))))
+		(output (equal? (+ (crazy2val czn) (crazy2val cz)) (crazy2val (crazy2add czn cz))))))
+
+(crazy2addGrade)
