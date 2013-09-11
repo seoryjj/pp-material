@@ -6,7 +6,8 @@
 (define (yanghuiGrade)
 	(begin
 		(printf "yanghui\n")
-		(output (equal? "" (yanghui -1)))
+		(output (equal? "111" (yanghui -2)))
+		(output (equal? "1" (yanghui -1)))
 		(output (equal? "" (yanghui 0)))
 		(output (equal? "1" (yanghui 1)))
 		(output (equal? "111" (yanghui 2)))
