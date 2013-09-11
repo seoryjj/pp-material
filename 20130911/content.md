@@ -283,3 +283,41 @@ if, equal?, or, and, +, -, *, /, <, quotient, remainder, ...
 (maxima '(1 5 2 4 3)) ; 5
 (maxima '(7 3 1)) ; 7
 ```
+
+### 추가 ###
+
+* 숫자를 문자열로 바꾸고 싶을 때
+
+```racket
+(number->string 123)
+```
+
+* 문자열을 숫자로 바꾸고 싶을 때
+
+```racket
+(string->number "123")
+```
+
+* ```print```와 ```printf```의 차이
+
+```racket
+(print "Hello, World!\n")
+(printf "Hello, World!\n")
+```
+
+* ```let```의 사용법
+
+```racket
+(let ((x (+ 1 2)) (y (+ 3 4)))
+  (+ x y))
+```
+
+* ```maxima```의 예제
+
+```racket
+(define (maxima l)
+  (if (null? l) 0
+    (let ((fst (car l))
+	      (acc (maxima (cdr l))))
+	  (if (> fst acc) fst acc))))
+```

@@ -273,3 +273,41 @@ There is a easier way to ```define``` a procedure.
 (maxima '(1 5 2 4 3)) ; 5
 (maxima '(7 3 1)) ; 7
 ```
+
+### Addendum ###
+
+* Convert a number to a string
+
+```racket
+(number->string 123)
+```
+
+* Convert a string to a number
+
+```racket
+(string->number "123")
+```
+
+* ```print``` and ```printf```: what's the difference?
+
+```racket
+(print "Hello, World!\n")
+(printf "Hello, World!\n")
+```
+
+* ```let``` (let expression)
+
+```racket
+(let ((x (+ 1 2)) (y (+ 3 4)))
+  (+ x y))
+```
+
+* ```maxima```: a solution
+
+```racket
+(define (maxima l)
+  (if (null? l) 0
+    (let ((fst (car l))
+	      (acc (maxima (cdr l))))
+	  (if (> fst acc) fst acc))))
+```
