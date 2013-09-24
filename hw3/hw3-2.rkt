@@ -5,4 +5,4 @@
 (provide maze-check)
 
 (define (maze-check maze start end)
-	(raise "TODO"))
+  (raise "TODO"))

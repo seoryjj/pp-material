@@ -72,7 +72,7 @@
   (define n (caar maze))
   (define m (cdar maze))
   (define lst (cdr maze))
-	(define file (open-output-file "hw3-3.ps" #:exists 'replace))
+  (define file (open-output-file "hw3-3.ps" #:exists 'replace))
   
   (define (draw co)
     (define x (car co))

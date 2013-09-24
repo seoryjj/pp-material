@@ -9,5 +9,5 @@
 (maze-pp maze2)
 
 (define (mazeGen n m)
-	(let ((maze (init-maze n m)))
-		(raise "TODO")))
+  (let ((maze (init-maze n m)))
+    (raise "TODO")))
