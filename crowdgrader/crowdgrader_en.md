@@ -43,51 +43,27 @@ review an answer.
 
   ![step2-3](step2-3.png)
 
-5. Fill in `Grade` and `Review`, and click `SUBMIT`.
+5. Fill in `Grade` with **any number** and `Review` with comments, and
+click `SUBMIT`.
+
+  **The numbers in the `Grade` box do not affect grade.**
 
   ![step2-4](step2-4.png)
 
-  ### How to make grade and review
-  
-  The perfect score is 5, and it is formed with correctness score 3,
-  readability score 2.
-  
-  Correctness score is graded as follows.
-  
-  * 3: It works perfectly!
-  * 2: It works in most of cases, but there are trivial mistakes such
-    as typo.
-  * 1: It works in some cases, but there are critical errors.
-  * 0: It will never work.
-
-  Readability score is graded as follows.
-  
-  * 2: It is easy to read!  
-  e.g.) All defined functions are easy to understand by well-explained
-  comments.
-  * 1: It is possible to read.  
-  e.g.) All used function/variable names are intuitive.
-  * 0: It is not readable.  
-  e.g.) There is no explanation about defined functions and used
-  function/variable names are not intuitive.
-
-  ### Order of graded answers
+  ### Order of reviewed answers
   
   Before clicking `SUBMIT`, all of graded answers should be sorted in
   decreasing graded order.  If they are not, you will encounter the
   next error message.  Please, sort the answers by dragging before
   clicking `SUBMIT`.
   
+  If there are two answers that have the same score, change the score
+  to any other number and rearrange them in decreasing graded order.
+
   ![step2-4](step2-4error.png)
   
   ![step2-4](step2-4drag.png)
 
-  If there are two answers that have the same score, you have two
-  choices.
-  
-  * Increase **0.1** point of **better** answer, or
-  * Decrease **0.1** point of **worse** answer.
-  
 ## Evaluate others' reviews of my homeworks
 
 1. Login with Google account at [crowdgrader][].
@@ -112,21 +88,8 @@ reviews.
 
 ## Check my grade
 
-1. Login with Google account at [crowdgrader][].
-
-2. Click `SUBMIT > Your submissions`.
-
-  ![step4-1](step4-1.png)
-
-3. Click `VIEW` of a problem you will check.
-
-  ![step4-2](step4-2.png)
-
-4. `SUBMISSION EVALUATION` is the score of your answer, `REVIEWING
-EVALUATION` is the score of your reviews, and `OVERALL ASSIGNMENT` is
-the overall score in which the reviewing score is reflected 20%.
-
-  ![step4-3](step4-3.png)
+You can check your grade
+[Web Board](https://ropas.snu.ac.kr/phpbb/viewforum.php?f=30).
 
 # About crowdgrader
 
