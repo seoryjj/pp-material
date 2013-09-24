@@ -2,6 +2,8 @@
 
 (provide zipper zipperN iter)
 
+(require racket/match)
+
 (define (zipper lhs rhs)
 	(match lhs
 				 ['() rhs]
