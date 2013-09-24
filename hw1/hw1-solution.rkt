@@ -2,8 +2,6 @@
 
 (provide gcd t2 yanghui crazy2val crazy2add)
 
-(require racket/match)
-
 (define (gcd n m)
 	(if (equal? n 0) m
 			(gcd (remainder m n) n)))
@@ -27,45 +25,44 @@
 						(string-append (f h (- w 1)) (number->string (comb h w)))))))
 
 (define (zpn x)
-	(match x
-				 ['z 0]
-				 ['p 1]
-				 ['n -1]))
+	(cond ((equal? x 'z) 0)
+				((equal? x 'p) 1)
+				((equal? x 'n) -1)))
 
 (define (crazy2val c)
-	(match c
-				 ['z 0]
-				 ['p 1]
-				 ['n -1]
-				 [(cons hd tl) (+ (* 2 (crazy2val tl)) (zpn hd))]))
+	(cond ((pair? c)
+				 (let ((hd (car c))
+							 (tl (cdr c)))
+					 (+ (* 2 (crazy2val tl)) (zpn hd))))
+				(else (zpn c))))
 
 (define (zpnadd a b c)
-	(match (+ (zpn a) (zpn b) (zpn c))
-				 [3 (cons 'p 'p)]
-				 [2 (cons 'z 'p)]
-				 [1 (cons 'p 'z)]
-				 [0 (cons 'z 'z)]
-				 [-1 (cons 'n 'z)]
-				 [-2 (cons 'z 'n)]
-				 [-3 (cons 'n 'n)]))
+	(let ((sum (+ (zpn a) (zpn b) (zpn c))))
+		(cond ((equal? sum 3) (cons 'p 'p))
+					((equal? sum 2) (cons 'z 'p))
+					((equal? sum 1) (cons 'p 'z))
+					((equal? sum 0) (cons 'z 'z))
+					((equal? sum -1) (cons 'n 'z))
+					((equal? sum -2) (cons 'z 'n))
+					((equal? sum -3) (cons 'n 'n)))))
 
-(define (crazy2add_carry lhs rhs carry)
-	(match lhs
-				 [(cons lhd ltl)
-					(match rhs
-								 [(cons rhd rtl)
-									(match (zpnadd lhd rhd carry)
-												 [(cons nd nc) (cons nd (crazy2add_carry ltl rtl nc))])]
-								 [rc
-									(match (zpnadd lhd rc carry)
-												 [(cons nd nc) (cons nd (crazy2add_carry ltl 'z nc))])])]
-				 [lc
-					(match rhs
-								 [(cons rhd rtl)
-									(match (zpnadd lc rhd carry)
-												 [(cons nd nc) (cons nd (crazy2add_carry 'z rtl nc))])]
-								 [rc
-									(zpnadd lc rc carry)])]))
+(define (crazy2add-carry lhs rhs carry)
+	(if (pair? lhs)
+			(let ((lhd (car lhs))
+						(ltl (cdr lhs)))
+				(if (pair? rhs)
+						(let* ((rhd (car rhs))
+									(rtl (cdr rhs))
+									(sum (zpnadd lhd rhd carry)))
+							(cons (car sum) (crazy2add-carry ltl rtl (cdr sum))))
+						(let ((sum (zpnadd lhd rhs carry)))
+							(cons (car sum) (crazy2add-carry ltl 'z (cdr sum))))))
+			(if (pair? rhs)
+					(let* ((rhd (car rhs))
+								(rtl (cdr rhs))
+								(sum (zpnadd lhs rhd carry)))
+						(cons (car sum) (crazy2add-carry 'z rtl (cdr sum))))
+					(zpnadd lhs rhs carry))))
 
 (define (crazy2add lhs rhs)
-	(crazy2add_carry lhs rhs 'z))
+	(crazy2add-carry lhs rhs 'z))
