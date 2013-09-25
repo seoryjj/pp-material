@@ -16,6 +16,7 @@
 + DO NOT RELY ON THE IMPLEMENTATION of hw3-3-library.rkt;
   USE JUST INTERFACES.
 + SUBMIT ONLY hw3-3.rkt
++ SELF-GRADE with hw3-3-grade.rkt before submission.
 + See hw3-3.ps to check if your answer is correct.
 + To see .ps files, download:
   - GhostScript: http://www.ghostscript.com/download/gsdnld.html
