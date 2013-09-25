@@ -1,3 +1,5 @@
+#lang racket
+
 (define (iseven n) (= (modulo n 2) 0)) ; iseven: int -> bool
 (define (even-list items) ; even-list: int list -> bool list
   (if (null? items)

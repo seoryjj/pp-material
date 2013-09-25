@@ -15,9 +15,9 @@ TA [Sungkeun Cho](http://ropas.snu.ac.kr/~skcho), [Jeehoon Kang](http://ropas.sn
 
 ## Lab Material ##
 
-* ```eval-list```
+* ```even-list```
 
-```eval-list```, given a list of integers, results in the list of
+```even-list```, given a list of integers, results in the list of
 booleans which indicate whether the given integers are even. Fill the
 blank.
 ```racket
