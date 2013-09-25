@@ -2,10 +2,12 @@
 
 (require "hw3-3-library.rkt")
 
+(provide mazeGen)
+
 ; Play around the interface of hw3-3-library.rkt.
 ; After executing this file, see hw3-3.ps.
 (define maze1 (init-maze 4 3))
-(define maze2 (open-s 1 1 maze1))
+(define maze2 (open-s 2 1 maze1))
 (maze-pp maze2)
 
 (define (mazeGen n m)
