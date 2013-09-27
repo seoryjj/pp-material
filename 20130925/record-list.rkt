@@ -4,11 +4,11 @@
 
 (define (empty-record) '()) ; empty-record: record
 
-(define (add-record k v d) (cons (cons k v) d)) ; add-record: string -> any -> record -> record
+(define (add-record k v d) (cons (cons k v) d)) ; add-record: string * any * record -> record
 
-(define (find-record key dic) ; find-record: string -> record -> record
+(define (find-record key dic) ; find-record: string * record -> record
   (if (pair? dic)
-      (let* ((kv (car dic)) ; kv: string * any
+      (let* ((kv (car dic)) ; kv: string X any
              (k (car kv)) ; k: string
              (v (cdr kv))) ; v: any
         (if (equal? key k) v

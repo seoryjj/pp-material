@@ -38,7 +38,7 @@ the given function.
   (map iseven items))
 ```
 
-Implement ```my-map: (a -> b) -> a list -> b list``` which behaves
+Implement ```my-map: (a -> b) * a list -> b list``` which behaves
 equivalently to ```map```. For example,
 
 ```racket
@@ -58,7 +58,7 @@ should results in ```'(1 2 3 4)```.
 The definition is:
 
 ```racket
-(define (fold lst f c) ; fold: a list -> (a -> b -> b) -> b -> b
+(define (fold lst f c) ; fold: a list * (a * b -> b) * b -> b
   (if (null? lst) c
   (f (car lst) (fold (cdr lst) f c))))
 ```
@@ -77,8 +77,8 @@ number as follows:
 
 ```racket
 empty-record: record
-add-record: string -> any -> record -> record
-find-record: string -> record -> any
+add-record: string * any * record -> record
+find-record: string * record -> any
 ```
 
 [```record-list.rkt```](record-list.rkt) contains an implementation of

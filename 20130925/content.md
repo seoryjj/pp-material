@@ -41,7 +41,7 @@
   (map iseven items))
 ```
 
-```map```과 똑같이 동작하는 ```my-map: (a -> b) -> a list -> b list```을 만들어 봅시다. 예를 들어,
+```map```과 똑같이 동작하는 ```my-map: (a -> b) * a list -> b list```을 만들어 봅시다. 예를 들어,
 
 ```racket
 (my-map abs (list -1 -2 -3 4))
@@ -61,7 +61,7 @@
 정의는 다음과 같습니다.
 
 ```racket
-(define (fold lst f c) ; fold: a list -> (a -> b -> b) -> b -> b
+(define (fold lst f c) ; fold: a list * (a * b -> b) * b -> b
   (if (null? lst) c
   (f (car lst) (fold (cdr lst) f c))))
 ```
@@ -80,8 +80,8 @@
 
 ```racket
 empty-record: record
-add-record: string -> any -> record -> record
-find-record: string -> record -> any
+add-record: string * any * record -> record
+find-record: string * record -> any
 ```
 
 [```record-list.rkt```](record-list.rkt)에 레코드의 구현이
