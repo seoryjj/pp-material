@@ -19,7 +19,7 @@
 
 ;;
 
-(define (fold lst f c) ; fold: a list -> (a -> b -> b) -> b -> b
+(define (fold lst f c) ; fold: a list * (a * b -> b) * b -> b
   (if (null? lst) c
       (f (car lst) (fold (cdr lst) f c))))
 
