@@ -1,9 +1,8 @@
 #lang racket
 
-(define (fibonacci1 n)
-  (cond ((= n 0) 0)
-        ((= n 1) 1)
-        (else (+ (fibonacci1 (- n 1)) (fibonacci1 (- n 2))))))
-
 (define (fibonacci2 n)
-  (raise "TODO"))
+  (define (fibonacci-aux n a b m)
+    (if (= n m) 
+        a
+        (raise "TODO")))
+  (fibonacci-aux n 0 1 0))

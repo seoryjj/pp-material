@@ -17,7 +17,7 @@
 
 * 1과 3의 눈이 나오는 경우: 14가지
 
-* 2과 3의 눈이 나오는 경우: 14가지
+* 2와 3의 눈이 나오는 경우: 14가지
 
 * 두 가지 종류의 눈이 나오는 확률: (14\*3) / (3\*3\*3\*3)
 
@@ -31,11 +31,11 @@ n 번 던졌을 때, 총 m 종류의 눈이 나오는 확률은 다음과 같이
    * (주사위를 n-1 번 던지는데 m 종류의 눈이 나오는 확률) \* (m/d).
    * (주사위를 n-1 번 던지는데 m-1 종류의 눈이 나오는 확률) \* ((d-(m-1))/d).
 
-```prob_show```는 눈의 종류가 d인 주사위를 n 번 던졌을 때, 총 m 종류의
+```prob-show```는 눈의 종류가 d인 주사위를 n 번 던졌을 때, 총 m 종류의
 눈이 나오는 확률을 계산하는 함수이다.  함수를 완성하여라.
 
 ```racket
-(define (prob_show n m d)
+(define (prob-show n m d)
   (cond ((< n m) (raise TODO))
         ((= m 1) (raise TODO))
         (else (raise TODO))))
@@ -61,6 +61,9 @@ n 번 던졌을 때, 총 m 종류의 눈이 나오는 확률은 다음과 같이
 
 다음 함수를 끝재귀를 이용하도록 바꿔라.
 
+Hint: `fibonacci-aux`의 인자 중 `a`는 `(fibonacci m)`의 값을, `b`는
+`(fibonacci (m+1))`의 값을 가지도록 정의하면 된다.
+
 ```racket
 (define (fibonacci1 n)
   (cond ((= n 0) 0)
@@ -68,7 +71,11 @@ n 번 던졌을 때, 총 m 종류의 눈이 나오는 확률은 다음과 같이
         (else (+ (fibonacci1 (- n 1)) (fibonacci1 (- n 2))))))
     
 (define (fibonacci2 n)
-  (raise "TODO"))
+  (define (fibonacci-aux n a b m)
+    (if (= n m) 
+        a
+        (raise "TODO")))
+  (fibonacci-aux n 0 1 0))
 ```
 
 ### 끝나는 프로그램
@@ -88,15 +95,15 @@ factorial 함수가 끝나간다는 사실을 보여주기 위해 함수 중간�
 1. 프로그램이 실행되면서 반드시 감소한다.
 2. 0보다 크거나 같다.
 
-아래의 gcd 함수도 끝나는 프로그램이다.  gcd 함수가 끝나간다는 사실을
-보여주도록 빈 칸을 채워라.  단, `my_gcd`함수의 입력은 0이거나 양의
-정수이다.
+아래의 `my-gcd` 함수도 끝나는 프로그램이다.  `my-gcd` 함수가 끝나간다는
+사실을 보여주도록 빈 칸을 채워라.  단, `my-gcd`함수의 입력은 0이거나
+양의 정수이다.
 
 ```racket
-(define (my_gcd n m)
+(define (my-gcd n m)
   (printf "~s~n" (raise "TODO"))
   (cond ((= n 0) m)
         ((= m 0) n)
-        ((< n m) (my_gcd n (- m n)))
-        (else (my_gcd (- n m) m))))
+        ((< n m) (my-gcd n (- m n)))
+        (else (my-gcd (- n m) m))))
 ```
