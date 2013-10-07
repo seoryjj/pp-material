@@ -45,9 +45,18 @@
     (let* ([col (index-of lst x)]
            [cell (index-of col y)])
       (index-of cell d)))
-  (define tops (filter (lambda (x) (lookup x 0 0)) (range-to n)))
-  (define bots (filter (lambda (x) (lookup x (- m 1) 3)) (range-to n)))
-
+  (define tops (filter
+                (lambda (x)
+                  (if (= (modulo x 2) 0)
+                      (lookup x 0 0)
+                      (or (lookup x 0 0) (lookup x 0 1) (lookup x 0 5))))
+                (range-to n)))
+  (define bots (filter
+                (lambda (x)
+                  (if (= (modulo x 2) 1)
+                      (lookup x (- m 1) 3)
+                      (or (lookup x (- m 1) 3) (lookup x (- m 1) 2) (lookup x (- m 1) 4))))
+                (range-to n)))
   (cond
    [(not (equal? (length tops) 1)) #f]
    [(not (equal? (length bots) 1)) #f]
@@ -99,7 +108,7 @@
 (output (lambda () (equal? #t (check-maze maze5))))
 (output (lambda () (equal? #t (check-maze maze6))))
 (output (lambda () (equal? #t (check-maze maze7))))
-
+(maze-pp maze7)
 ;;
 
 (output (lambda () (equal? #t (check-maze (mazeGen 3 3)))))
