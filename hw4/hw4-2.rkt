@@ -57,3 +57,7 @@
   (raise "TODO"))
 (define (pprint solution) ; pprint: solution -> string
   (raise "TODO"))
+
+
+; Write down types for each declaration and functions.
+; -1 points for each wrong type annotation (-5 points top).

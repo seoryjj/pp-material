@@ -47,6 +47,10 @@
   (raise "TODO"))
 
 
+; Write down types for each declaration and functions.
+; -1 points for each wrong type annotation (-2 points top).
+
+
 ; You have to specify an evidence why a recursive call terminates.
 ; At the beginning of each recursive call, print the decreasing evidence
 ; as specified in the following function.
@@ -65,7 +69,7 @@
 ; 2) (+ x x y) is a function of arguments x and y;
 ; 3) (+ x x y) strictly decreases for each recursive call.
 (define (gcd x y)           ; int -> int -> int
-  (printf "decreasing: ~s~n" (+ x x y)) ; (+ x y) strictly decreases for each call.
+  (printf "decreasing: ~s~n" (+ x x y)) ; (+ x y) strictly decreases for each recursive call.
   (cond
    [(equal? x 0) y]
    [(equal? y 0) x]
