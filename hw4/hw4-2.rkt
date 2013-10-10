@@ -1,13 +1,29 @@
 #lang racket
 
+
 ; We auto-grade only react function; other functions are not
 ; auto-graded. However, S, K, I, v, and a are required for
 ; grading. See hw4-2-grade.rkt for more information.
+; If this statement is omitted, your submission will be graded 0.
 (provide react S K I v a)
 
 
+; Implement react. The contents provided below can be modified,
+; unless the modification does not change the type and satisfies the spec.
+;
+; In the document, react has the type solution -> void.
+; However, implement react: solution -> string for ease of grading.
+; Return the string of the given solution printed by pprint.
+;
+; See hw4-2-grade.rkt for more information on what the returned string should look like.
+; In short,
+; S prints "S";
+; K prints "K";
+; I prints "I";
+; variable x prints "x";
+; tuple (E F) prints "(" + E + " " + F + ")".
 (define (react solution) ; react: solution -> string
-  (raise "TODO"))
+  (pprint (raise "TODO")))
 
 (define S ; S: solution
   (raise "TODO"))
