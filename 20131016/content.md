@@ -40,7 +40,7 @@
 
 다음 직각 좌표계 복소수에 관한 함수를 만들어봅시다.
 ```racket
-is-c-rect?: α -> bool
+is-c-rect?: c-rect -> bool
 c-rect-make: number * number -> c-rect
 c-rect-real: c-rect -> number
 c-rect-imaginary: c-rect -> number
@@ -48,7 +48,7 @@ c-rect-imaginary: c-rect -> number
 
 또 다음 극좌표계 복소수에 관한 함수를 만들어봅시다.
 ```racket
-is-c-polar?: α -> bool
+is-c-polar?: c-polar -> bool
 c-polar-make: number * number -> c-polar
 c-polar-real: c-polar -> number
 c-polar-imaginary: c-polar -> number
