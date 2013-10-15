@@ -21,18 +21,18 @@
 
 ;;; ex1: the next command must print tiles as follows.
 ;
-; XXOX
-; OXXX
-; XXXO
-; XOXX
+; BBWB
+; WBBB
+; BBBW
+; BWBB
 (pprint Compound1)
 
 ;;; ex2: the next command must print tiles as follows.
 ;
-; XOOX
-; XXXX
-; XOOX
-; XXXX
+; BWWB
+; BBBB
+; BWWB
+; BBBB
 (pprint Compound2)
 
 

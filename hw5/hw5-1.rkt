@@ -41,12 +41,12 @@
 ;;; how to pprint
 ;
 ; Make the pprint function to print tiles on the screen using the
-; characters 'O' for the white tile and 'X' for the black tile.  For
+; characters 'W' for the white tile and 'B' for the black tile.  For
 ; example, (pprint (glue black black black white)) should prints tiles
 ; as follows.
 ;
-; XX
-; OX
+; BB
+; WB
 
 
 ;;; implementation with array
@@ -63,7 +63,9 @@
 (define (neighbor-array loc f) ; neighbor-array: location * form -> int
   (raise "TODO"))
 
-(define (pprint-array f) ; pprint-array: form -> void
+; In the document, it is said to have type form -> void, but implement
+; as form -> string.
+(define (pprint-array f) ; pprint-array: form -> string
   (raise "TODO"))
 
 (define (is-array? f) ; is-array?: form -> bool
@@ -84,7 +86,9 @@
 (define (neighbor-tree loc f) ; neighbor-tree: location * form -> int
   (raise "TODO"))
 
-(define (pprint-tree f) ; pprint-tree: form -> void
+; In the document, it is said to have type form -> void, but implement
+; as form -> string.
+(define (pprint-tree f) ; pprint-tree: form -> string
   (raise "TODO"))
 
 (define (is-tree? f) ; is-tree?: form -> bool
@@ -111,5 +115,7 @@
 (define (neighbor loc f) ; neighbor: location * form -> int
   (raise "TODO"))
 
-(define (pprint f) ; pprint: form -> void
+; In the document, it is said to have type form -> void, but implement
+; as form -> string.
+(define (pprint f) ; pprint: form -> string
   (raise "TODO"))

@@ -1,1 +1,3 @@
 content*.html
+**.md~
+.DS_Store
