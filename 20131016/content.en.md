@@ -43,9 +43,10 @@ You can give inputs to this vending machine:
 
 The vending machine can give you:
 
-+ coin (```give-coin```)
-+ cola (```give-cola```)
-+ cider (```give-cider```)
++ nothing (```nothing```)
++ coin (```coin```)
++ cola (```cola```)
++ cider (```cider```)
 
 Based on this, you can express the vending machine like:
 
