@@ -52,15 +52,16 @@
 
 자판기가 줄 수 있는 출력은 다음과 같습니다:
 
-+ 동전 반환하기 (```give-coin```)
-+ 콜라 주기 (```give-cola```)
-+ 사이다 주기 (```give-cider```)
++ 아무것도 안하기 (```nothing```)
++ 동전 반환하기 (```coin```)
++ 콜라 주기 (```cola```)
++ 사이다 주기 (```cider```)
 
 이를 토대로 자판기를 그림으로 표현하면 다음과 같습니다:
 
 ![fsm](fsm.png)
 
-이런 형태의 그래프를 유한 상태 기계(finite state machine)이라고
+이런 형태의 그래프를 **유한 상태 기계 (finite state machine)**이라고
 부릅니다. 보다 자세한 내용은
 [위키피디아](http://ko.wikipedia.org/wiki/%EC%9C%A0%ED%95%9C_%EC%83%81%ED%83%9C_%EA%B8%B0%EA%B3%84)를
 참조하세요.
