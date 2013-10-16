@@ -15,17 +15,18 @@
 (define (read-tape tape) ; read-tape: tape -> symbol
   (raise "TODO"))
 
-(define (write-tape tape sym) ; write-tape: tape ∗* symbol →-> tape
+(define (write-tape tape sym) ; write-tape: tape * symbol -> tape
   (raise "TODO"))
 
-(define (move-tape-left tape) ; move-tape-left: tape →-> tape
+(define (move-tape-left tape) ; move-tape-left: tape -> tape
   (raise "TODO"))
 
-(define (move-tape-right tape) ; move-tape-right: tape →-> tape
+(define (move-tape-right tape) ; move-tape-right: tape -> tape
   (raise "TODO"))
 
-; Implement "tape -> string" instead of "tap -> void".
-(define (print-tape tape) ; print-tape: tape →-> string
+; Implement "tape * int -> string" instead of "tap -> void".
+; The int argument is the size of printed tapes as in print-tm.
+(define (print-tape tape size) ; print-tape: tape * int -> string
   (raise "TODO"))
 
 
