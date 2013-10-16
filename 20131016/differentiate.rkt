@@ -56,7 +56,7 @@
          (raise "TODO")]))
 
 (define e1 ; 3x - 1
-  (plus (multiply (const 2) (var "x"))
+  (plus (multiply (const 3) (var "x"))
         (minus (const 1))))
 (print (differentiate "x" e1))
 (printf "\n")
