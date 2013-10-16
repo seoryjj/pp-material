@@ -11,15 +11,15 @@
   (raise "TODO"))
 
 (define (run-fsm curstate inputs fsm) ; run-stem: state * input list * fsm -> state X output list
-  (cond ([(equal? '() inputs) (cons curstate '())]
-         [else
-          (let* ([mid (step-fsm curstate (car inputs) fsm)]
-                 [midstate (car mid)]
-                 [midoutput (cdr mid)]
-                 [end (run-fsm midstate (cdr inputs) fsm)]
-                 [endstate (car end)]
-                 [endoutputs (cdr end)])
-            (cons endstate (cons midoutput endoutputs)))])))
+  (cond [(equal? '() inputs) (cons curstate '())]
+        [else
+        (let* ([mid (step-fsm curstate (car inputs) fsm)]
+               [midstate (car mid)]
+               [midoutput (cdr mid)]
+               [end (run-fsm midstate (cdr inputs) fsm)]
+               [endstate (car end)]
+               [endoutputs (cdr end)])
+          (cons endstate (cons midoutput endoutputs)))]))
 
 (define fsm1 init-fsm)
 (define fsm2 (add-rule-fsm "initial" "insert-coin" "coined" "nothing" fsm1))
