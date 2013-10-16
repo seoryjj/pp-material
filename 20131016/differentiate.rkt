@@ -45,9 +45,9 @@
   (raise "TODO"))
 
 (define (differentiate v e)
-  (cond [(is-const? e) 0]
+  (cond [(is-const? e) (const 0)]
         [(is-var? e)
-         (if (equal? (var-var e) v) 1 0)]
+         (const (if (equal? (var-var e) v) 1 0))]
         [(is-plus? e)
          (raise "TODO")]
         [(is-minus? e)
