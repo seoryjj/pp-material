@@ -50,7 +50,7 @@ The vending machine can give you:
 
 Based on this, you can express the vending machine like:
 
-TODO
+![fsm](fsm.png)
 
 This kind of graph is called a **finite state machine**. See
 [Wikipedia](http://en.wikipedia.org/wiki/Finite-state_machine) for
