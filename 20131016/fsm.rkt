@@ -31,5 +31,6 @@
 (define fsm8 (add-rule-fsm "coined" "push-cider" "initial" "give-cider" fsm7))
 (define fsm9 (add-rule-fsm "coined" "push-return" "initial" "give-coin" fsm8))
 
-; output: (cons "initial" (list "" "give-cola" "" "give-coin" "give-cider" ""))
-(run-fsm "initial" (list "insert-coin" "push-cola" "insert-coin" "insert-coin" "push-cider" "push-cider") fsm9)
+(equal?
+ (cons "initial" (list "" "give-cola" "" "give-coin" "give-cider" ""))
+ (run-fsm "initial" (list "insert-coin" "push-cola" "insert-coin" "insert-coin" "push-cider" "push-cider") fsm9))

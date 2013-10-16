@@ -19,80 +19,53 @@ Note that we will treat only
 See [Wikipedia](http://en.wikipedia.org/wiki/Differentiation) for
 information on differentiation.
 
-### Complex numbers ###
+### Finite State Machine ###
 
-Implement complex numbers. You can do in two ways:
+Think of a vending machine.
 
-+ Descartes coordinate system: As usual, express as ```(x, y)```.  +
-Polar coordinate system: ```(r, θ)``` means the length ```r``` and the
-angle ```θ```.
++ The vending machine gets coins.
++ If coin is inserted and "cola" button is pushed, it gives a cola.
++ If coin is inserted and "cider" button is pushed, it gives a cider.
++ If coin is inserted and "return" button is pushed, it gives a coin.
++ If coin is inserted and a new coin is inserted, it gives the the inserted coin.
 
-Both are represented as ```real X real```, so it is better to
-distinguish with tagging. For example,
+Let's formally express this vending machine. It has two states:
 
-+ ```(cons 'rect (cons 1 pi))``` means ```(1, pi)``` in the Descartes
-  coordinate, and
-+ ```(cons 'polar (cons 1 pi))``` means ```(1, pi)``` in polar
-coordinate, i.e. ```(-1,0)``` in Descartes coordinate.
++ coin not inserted (```initial```)
++ coin inserted (```coined```)
 
-Implement functions on Descartes coordinate system,
-```racket
-is-c-rect?: c-rect -> bool
-c-rect-make: number * number -> c-rect
-c-rect-real: c-rect -> number
-c-rect-imaginary: c-rect -> number
-```
+You can give inputs to this vending machine:
 
-and functions on polar coordinate system.
-```racket
-is-c-polar?: c-polar -> bool
-c-polar-make: number * number -> c-polar
-c-polar-real: c-polar -> number
-c-polar-imaginary: c-polar -> number
-```
++ insert coin (```insert-coin```)
++ push "cola" button (```push-cola```)
++ push "cider" button (```push-cider```)
++ push "return" button (```push-return```)
 
-Implement functions that works on both coordinate systems.
-```racket
-c-real: complex -> number
-c-imaginary: complex -> number
-c-angle: complex -> number
-c-radius: complex -> number
-c-conjugate: complex -> complex
-```
+The vending machine can give you:
 
-See Wikipedia for more information on complex numbers and polar
-coordinate system.
++ coin (```give-coin```)
++ cola (```give-cola```)
++ cider (```give-cider```)
 
-+ [Complex number](http://en.wikipedia.org/wiki/Complex_number)
-+ [Polar coordinate system](http://en.wikipedia.org/wiki/Polar_coordinate_system)
+Based on this, you can express the vending machine like:
+
+TODO
+
+This kind of graph is called a **finite state machine**. See
+[Wikipedia](http://en.wikipedia.org/wiki/Finite-state_machine) for
+more information.
+
+You have to implement the finite state machine. Write the following
+functions. In this case, ```input```, ```output```, and ```state```
+are all strings:
 
 ```racket
-(define c1 (c-rect-make 1 2))
-(define c2 (c-rect-make 3 4))
-(define c3 (c-polar-make 0.7 3))
-(define c4 (c-polar-make 0.5 2))
-
-(c-rect-real c1) ; 1
-(c-rect-imaginary c2) ; 4
-(c-polar-angle c3) ; 0.7
-(c-polar-radius c4) ; 2
-(is-c-rect? c1) ; #t
-(is-c-rect? c3) ; #f
-(is-c-polar? c4) ; #t
-(c-real c1) ; 1
-(c-real c3) ; 2.2945265618534654 = (* 3 (cos 0.7))
-(c-imaginary c2) ; 4
-(c-imaginary c4) ; 0.958851077208406 = (* 2 (sin 0.5))
-(c-angle c1) ; 1.1071487177940904;(atan 2 1)
-(c-angle c3) ; 0.7
-(c-radius c2) ; 5 = (sqrt (+ (expt 3 2) (expt 4 2)))
-(c-radius c4) ; 2
-
-(define c5 (c-conjugate c1))
-(define c6 (c-conjugate c3))
-
-(c-real c5) ; 1
-(c-imaginary c5) ; -2
-(c-real c6) ; 2.2945265618534654
-(c-imaginary c6) ; -1.932653061713073
+init-fsm: fsm
+add-rule-fsm: state * input * state * output * fsm -> fsm
+step-fsm: state * input * fsm -> state X output
+run-fsm: state * input list * fsm -> state X output list
 ```
+
+In the [skeleton](fsm.rkt), the vending machine is already implemented
+based on the above interface. Fill blanks so as for the vending
+machine to work well.

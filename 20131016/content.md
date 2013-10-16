@@ -60,7 +60,7 @@
 
 TODO
 
-이런 형태의 그래프를 유한 상태 기계(finite state machine)이라고
+이런 형태의 그래프를 **유한 상태 기계 (finite state machine)**이라고
 부릅니다. 보다 자세한 내용은
 [위키피디아](http://ko.wikipedia.org/wiki/%EC%9C%A0%ED%95%9C_%EC%83%81%ED%83%9C_%EA%B8%B0%EA%B3%84)를
 참조하세요.
