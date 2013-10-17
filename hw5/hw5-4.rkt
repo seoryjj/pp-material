@@ -1,8 +1,6 @@
 #lang racket
 
-;;; CAUTION: read VERY CAREFULLY hw5-4-grade.rkt before doing your HW.
-;;; Instructions how to write submission (and grade it) is written in
-;;; hw5-4-grade.rkt.
+;;; It is recommended to see hw5-2-grade.rkt before doing your HW.
 
 ; If these statements are omitted, your submission will be graded 0.
 (provide catchYou)

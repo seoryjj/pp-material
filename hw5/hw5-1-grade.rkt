@@ -33,17 +33,17 @@
 (printf "2) Array Representations\n")
 ; Array tile should look like:
 (define basic-array (glue-array-from-array B B B W))
-(output (lambda () (equal? (cons 'array (list (list 'B 'B) (list 'W 'B)))
+(output (lambda () (equal? '(array (B B) (W B))
                            basic-array)))
-(output (lambda () (equal? (cons 'array (list (list 'B 'B) (list 'W 'B)))
+(output (lambda () (equal? '(array (B B) (W B))
                            (glue-array-from-tree B B B W))))
 ;
 (printf "3) Tree Representations\n")
 ; Tree tile should look like:
 (define basic-tree (glue-tree-from-tree B B B W))
-(output (lambda () (equal? (cons 'tree (list 'B 'B 'B 'W))
+(output (lambda () (equal? '(tree B B B W)
                            basic-tree)))
-(output (lambda () (equal? (cons 'tree (list 'B 'B 'B 'W))
+(output (lambda () (equal? '(tree B B B W)
                            (glue-tree-from-array B B B W))))
 ;
 (printf "4) Bigger Examples\n")

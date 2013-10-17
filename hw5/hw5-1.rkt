@@ -36,15 +36,51 @@
 
 
 ;;; primitive tile
+; A black tile is 'B and a whit etile is 'W.
 
 (define black ; black: form
   'B)
-
 (define white ; white: form
   'W)
 
 
-;;; implementation with array
+;;; complex tile
+;
+; An array tile looks like:
+; (cons 'array (list row_1 row_2 ... row_n)),
+; for each row_i = (list cell_i1 ... cell_in).
+;
+; Examples:
+; 1.
+; (cons 'array (list (list 'B 'B) (list 'W 'W)))
+; BB
+; WW
+;
+; 2.
+; (cons 'array (list (list 'B 'B 'B 'B) (list 'B 'B 'B 'B) (list 'W 'W 'B 'B) (list 'W 'W 'B 'B)))
+; BBBB
+; BBBB
+; WWBB
+; WWBB
+;
+;
+; An tree tile looks like:
+; (cons 'tree (list subtree_nw subtree_ne subtree_se subtree_sw)).
+;
+; Examples:
+; 1.
+; (cons 'tree (list 'B 'B 'W 'B))
+; BB
+; BW
+;
+; 2.
+; (cons 'tree (list (list 'B 'B 'B 'W) (list 'B 'B 'W 'B) (list 'B 'W 'B 'B) (list 'W 'B 'B 'B)))
+; BBBB
+; WBBW
+; BWWB
+; BBBB
+;
+; See hw5-1-grade.rkt for more details on grading array and tree representation.
 
 (define (glue-array-from-tree nw ne se sw) ; glue-array-from-tree: form * form * form * form -> form
   'TODO)
@@ -73,7 +109,8 @@
 (define (is-array? f) ; is-array?: form -> bool
   (cond [(equal? 'B f) #t]
         [(equal? 'W f) #t]
-        [else 'TODO]))
+        [(equal? 'array (car f)) #t]
+        [else #f]))
 
 
 ;;; implementation with tree
@@ -92,7 +129,8 @@
 (define (is-tree? f) ; is-tree?: form -> bool
   (cond [(equal? 'B f) #t]
         [(equal? 'W f) #t]
-        [else 'TODO]))
+        [(equal? 'tree (car f)) #t]
+        [else #f]))
 
 
 ;;; conversions 
