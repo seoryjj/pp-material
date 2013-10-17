@@ -77,7 +77,7 @@
 ; (cons 'tree (list (list 'B 'B 'B 'W) (list 'B 'B 'W 'B) (list 'B 'W 'B 'B) (list 'W 'B 'B 'B)))
 ; BBBB
 ; WBBW
-; BWWB
+; WBBW
 ; BBBB
 ;
 ; See hw5-1-grade.rkt for more details on grading array and tree representation.
