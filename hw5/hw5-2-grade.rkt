@@ -7,21 +7,27 @@
 
 (define B black)
 (define W white)
-(define Basic (glue B B B W))
+(define basic (glue B B B W))
 (define (turn pattern i)
   (if (<= i 0) 
       pattern
       (turn (rotate pattern) (- i 1))))
-(define Compound1
-  (glue Basic (turn Basic 1) (turn Basic 2) (turn Basic 3)))
-(define Compound2
-  (rotate (glue Basic Basic (rotate Basic) (rotate Basic))))
-(define Compound3
-  (glue Compound1 Compound2 (turn Compound1 2) (turn Compound2 2)))
+(define compound1
+  (glue basic (turn basic 1) (turn basic 2) (turn basic 3)))
+(define compound2
+  (rotate (glue basic basic (rotate basic) (rotate basic))))
+(define compound3
+  (glue compound1 compound2 (turn compound1 2) (turn compound2 2)))
 
 
 ;;; beautiful test
 
-(output (lambda () (equal? #t (beautiful Compound1))))
-(output (lambda () (equal? #f (beautiful Compound2))))
-(output (lambda () (equal? #t (beautiful Compound3))))
+(output (lambda () (equal? 0 (size B))))
+(output (lambda () (equal? 0 (size W))))
+(output (lambda () (equal? 1 (size basic))))
+(output (lambda () (equal? 2 (size compound1))))
+(output (lambda () (equal? 2 (size compound2))))
+(output (lambda () (equal? 3 (size compound3))))
+(output (lambda () (equal? #t (beautiful compound1))))
+(output (lambda () (equal? #f (beautiful compound2))))
+(output (lambda () (equal? #t (beautiful compound3))))
