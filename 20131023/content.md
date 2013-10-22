@@ -82,3 +82,131 @@ c-conjugate: complex -> complex
 (c-real c6) ; 2.2945265618534654
 (c-imaginary c6) ; -1.932653061713073
 ```
+
+### 값 중심 vs. 물건 중심 ###
+
+수업시간에 *값 중심(applicative)*, *물건 중심(imperative)* 프로그래밍에
+대해 배우셨을 것입니다.  이 실습시간에는 각 프로그래밍 방식을 경험해
+봅시다.
+
+#### Summation ####
+
+0부터 10까지 더하는 프로그램을 다음과 같이 두 가지 스타일로 구현할 수
+있습니다.
+
+##### 값 중심 스타일
+
+```racket
+(define (sum_a n)
+  (if (equal? n 0)
+      0
+      (+ n (sum_a (- n 1)))))
+
+(sum_a 10)
+```
+
+위에서는 재귀함수를 이용해서 0부터 10까지 더하는 프로그램을
+구현하였습니다.  등장하는 모든 변수(`n`)은 프로그램 실행 중 내용이
+변하지 않는 **값**입니다.  
+
+다음은 위와 같은 함수를 물건 중심으로 구현한 예제입니다.
+
+```racket
+(define sum 0)
+
+(define (sum_i n)
+  (if (equal? n 0)
+      sum
+      (begin 
+        (set! sum (+ n sum))
+        (sum_i (- n 1)))))
+
+(sum_i 10)
+```
+
+이 물건 중심 프로그램에는 `sum`이라는 내용이 변하는 **물건**이
+등장합니다.  이 물건은 프로그램 실행 중에 내용이 차례차례 바뀌어
+최종적으로 우리가 얻고자 하는 어떤 물건이 됩니다.
+
+다음은 참고로 racket의 `for`문을 이용한 함수입니다.  자세한 내용은
+racket의 [메뉴얼](http://docs.racket-lang.org/reference/for.html)을
+참고하세요.
+
+```racket
+(set! sum 0)
+
+(define (sum_i_for n)
+  (for ((i (+ n 1)))
+       (set! sum (+ sum i)))
+  sum)
+
+(sum_i_for 10)
+```
+
+#### 유한상태기계 ####
+
+지난 실습시간에 구현한 자판기를 물건 중심(imperative programming)
+스타일로 다시 구현해 봅시다.
+
+다음은 오늘 구현할 유한상태기계의
+[뼈대코드](https://github.com/lunaticas/pp-material/blob/master/20131023/fsm_imp.rkt)입니다.
+값 중심으로 구현한 지난 시간의
+[모범답안](https://github.com/lunaticas/pp-material/blob/master/20131023/fsm.rkt)과
+비교해 보세요.
+
+```racket
+(define fsm null)
+
+(define (init-fsm) ; init-fsm: unit
+  (set! fsm null))
+
+(define (add-rule-fsm curstate input newstate output) ; add-rule-fsm: state * input * state * output -> unit
+  (set! fsm (cons (cons (cons curstate input) (cons newstate output)) fsm)))
+
+(define (step-fsm curstate input) ; step-fsm: state * input -> state X output
+  (let ((state curstate)
+        (output "nothing"))
+    (for ((rule fsm))
+         (raise "TODO"))
+    (cons state output)))
+
+(define (run-fsm curstate inputs) ; run-stem: state * input list -> state X output list
+  (let ((state curstate)
+        (output-list null))
+    (for ((input inputs))
+         (raise "TODO"))
+    (cons state output-list)))
+
+(init-fsm)
+(add-rule-fsm "initial" "insert-coin" "coined" "nothing")
+(add-rule-fsm "initial" "push-cola" "initial" "nothing")
+(add-rule-fsm "initial" "push-cider" "initial" "nothing")
+(add-rule-fsm "initial" "push-return" "initial" "nothing")
+(add-rule-fsm "coined" "insert-coin" "coined" "coin")
+(add-rule-fsm "coined" "push-cola" "initial" "cola")
+(add-rule-fsm "coined" "push-cider" "initial" "cider")
+(add-rule-fsm "coined" "push-return" "initial" "coin")
+
+(equal?
+ (cons "initial" (list "nothing" "cola" "nothing" "coin" "cider" "nothing"))
+ (run-fsm "initial" (list "insert-coin" "push-cola" "insert-coin" "insert-coin" "push-cider" "push-cider")))
+```
+
+여러분이 작성하셔야할 함수는 유한상태기계를 실행시키는 `step-fsm`과
+`run-fsm`입니다.  다음 도움말을 참고하세요.
+
+1. 유한상태기계를 나타내는 `fsm`은 **값**이 아니라 **물건**이다.
+따라서 `add-rule-fsm`을 이용하여 룰을 추가할 때마가 그 내용이 바뀐다.
+
+2. 유한상태기계는 `((state X input) X (state X output)) list` 타입을
+갖는다.
+
+3. `step-fsm`의 동작: (1) 유한상태기계의 모든 룰을 순회하며
+현재상태(`curstate`)와 입력(`input`)에 해당하는 다음상태와 출력을 변수
+`state`와 `output`에 기록; (2) 순회가 끝나면 `state`와 `output`을
+출력.
+
+4. `run-fsm`의 동작: (1) 입력리스트(`inputs`)를 순회하며 `step-fsm`을
+수행.  이때 `step-fsm`의 실행결과인 상태와 출력을 `state`와
+`output-list`에 기록; (2) 순회가 끝나면 `state`와 `output-list`를
+출력.
