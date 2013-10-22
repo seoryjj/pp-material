@@ -19,7 +19,7 @@
          (raise "TODO"))
     output))
 
-(define (run-fsm inputs) ; run-stem: input list -> output list
+(define (run-fsm inputs) ; run-fsm: input list -> output list
   (let ((output-list null))
     (for ((input inputs))
          (raise "TODO"))
