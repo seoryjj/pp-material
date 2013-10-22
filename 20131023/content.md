@@ -158,26 +158,27 @@ racket의 [메뉴얼](http://docs.racket-lang.org/reference/for.html)을
 
 ```racket
 (define fsm null)
+(define state "initial")
 
 (define (init-fsm) ; init-fsm: unit
-  (set! fsm null))
+  (set! fsm null)
+  (set! state "initial"))
 
 (define (add-rule-fsm curstate input newstate output) ; add-rule-fsm: state * input * state * output -> unit
   (set! fsm (cons (cons (cons curstate input) (cons newstate output)) fsm)))
 
-(define (step-fsm curstate input) ; step-fsm: state * input -> state X output
-  (let ((state curstate)
+(define (step-fsm input) ; step-fsm: input -> output
+  (let ((input-state state)
         (output "nothing"))
     (for ((rule fsm))
          (raise "TODO"))
-    (cons state output)))
+    output))
 
-(define (run-fsm curstate inputs) ; run-stem: state * input list -> state X output list
-  (let ((state curstate)
-        (output-list null))
+(define (run-fsm inputs) ; run-stem: input list -> output list
+  (let ((output-list null))
     (for ((input inputs))
          (raise "TODO"))
-    (cons state output-list)))
+    output-list))
 
 (init-fsm)
 (add-rule-fsm "initial" "insert-coin" "coined" "nothing")
@@ -189,26 +190,26 @@ racket의 [메뉴얼](http://docs.racket-lang.org/reference/for.html)을
 (add-rule-fsm "coined" "push-cider" "initial" "cider")
 (add-rule-fsm "coined" "push-return" "initial" "coin")
 
-(equal?
- (cons "initial" (list "nothing" "cola" "nothing" "coin" "cider" "nothing"))
- (run-fsm "initial" (list "insert-coin" "push-cola" "insert-coin" "insert-coin" "push-cider" "push-cider")))
+(and
+ (equal? "initial" state)
+ (equal?
+  (list "nothing" "cola" "nothing" "coin" "cider" "nothing")
+  (run-fsm (list "insert-coin" "push-cola" "insert-coin" "insert-coin" "push-cider" "push-cider"))))
 ```
 
 여러분이 작성하셔야할 함수는 유한상태기계를 실행시키는 `step-fsm`과
 `run-fsm`입니다.  다음 도움말을 참고하세요.
 
-1. 유한상태기계를 나타내는 `fsm`은 **값**이 아니라 **물건**이다.
-따라서 `add-rule-fsm`을 이용하여 룰을 추가할 때마가 그 내용이 바뀐다.
+1. 유한상태기계를 나타내는 `fsm`와 상태를 나타내는 `state`는 **값**이
+아니라 **물건**이다.  따라서 함수들이 실행될 때마다 그 내용이 바뀐다.
 
 2. 유한상태기계는 `((state X input) X (state X output)) list` 타입을
 갖는다.
 
 3. `step-fsm`의 동작: (1) 유한상태기계의 모든 룰을 순회하며
-현재상태(`curstate`)와 입력(`input`)에 해당하는 다음상태와 출력을 변수
-`state`와 `output`에 기록; (2) 순회가 끝나면 `state`와 `output`을
-출력.
+입력상태(`input-state`)와 입력(`input`)에 해당하는 다음상태와 출력을
+변수 `state`와 `output`에 기록; (2) 순회가 끝나면 `output`을 출력.
 
 4. `run-fsm`의 동작: (1) 입력리스트(`inputs`)를 순회하며 `step-fsm`을
-수행.  이때 `step-fsm`의 실행결과인 상태와 출력을 `state`와
-`output-list`에 기록; (2) 순회가 끝나면 `state`와 `output-list`를
-출력.
+수행.  이때 `step-fsm`의 실행결과인 출력을 `output-list`에 기록; (2)
+순회가 끝나면 `output-list`를 출력.
