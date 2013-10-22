@@ -3,26 +3,27 @@
 ; imperative programming
 
 (define fsm null)
+(define state "initial")
 
 (define (init-fsm) ; init-fsm: unit
-  (set! fsm null))
+  (set! fsm null)
+  (set! state "initial"))
 
 (define (add-rule-fsm curstate input newstate output) ; add-rule-fsm: state * input * state * output -> unit
   (set! fsm (cons (cons (cons curstate input) (cons newstate output)) fsm)))
 
-(define (step-fsm curstate input) ; step-fsm: state * input -> state X output
-  (let ((state curstate)
+(define (step-fsm input) ; step-fsm: input -> output
+  (let ((input-state state)
         (output "nothing"))
     (for ((rule fsm))
          (raise "TODO"))
-    (cons state output)))
+    output))
 
-(define (run-fsm curstate inputs) ; run-stem: state * input list -> state X output list
-  (let ((state curstate)
-        (output-list null))
+(define (run-fsm inputs) ; run-stem: input list -> output list
+  (let ((output-list null))
     (for ((input inputs))
          (raise "TODO"))
-    (cons state output-list)))
+    output-list))
 
 (init-fsm)
 (add-rule-fsm "initial" "insert-coin" "coined" "nothing")
@@ -34,6 +35,8 @@
 (add-rule-fsm "coined" "push-cider" "initial" "cider")
 (add-rule-fsm "coined" "push-return" "initial" "coin")
 
-(equal?
- (cons "initial" (list "nothing" "cola" "nothing" "coin" "cider" "nothing"))
- (run-fsm "initial" (list "insert-coin" "push-cola" "insert-coin" "insert-coin" "push-cider" "push-cider")))
+(and
+ (equal? "initial" state)
+ (equal?
+  (list "nothing" "cola" "nothing" "coin" "cider" "nothing")
+  (run-fsm (list "insert-coin" "push-cola" "insert-coin" "insert-coin" "push-cider" "push-cider"))))
