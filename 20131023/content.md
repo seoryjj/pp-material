@@ -33,8 +33,8 @@ c-rect-imaginary: c-rect -> number
 ```racket
 is-c-polar?: c-polar -> bool
 c-polar-make: number * number -> c-polar
-c-polar-real: c-polar -> number
-c-polar-imaginary: c-polar -> number
+c-polar-angle: c-polar -> number
+c-polar-radius: c-polar -> number
 ```
 
 다음 어떤 좌표계로 표현된 복소수를 입력으로 받아도 잘 동작하는 다음
