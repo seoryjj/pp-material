@@ -1,7 +1,13 @@
 #lang racket
 
 
+;;; CAUTION: read VERY CAREFULLY hw5-1-grade.rkt before doing your HW.
+;;; Instructions how to write submission (and grade it) is written in
+;;; hw5-1-grade.rkt.
+
 ;;; If these statements are omitted, your submission will be graded 0.
+;;; You can add whatever function you would like to make public.
+;;; For example, if you want a function foo in hw5-2, provide it.
 
 (provide black)
 (provide white)
@@ -30,92 +36,130 @@
 
 
 ;;; primitive tile
+; A black tile is 'B and a whit etile is 'W.
 
 (define black ; black: form
-  (raise "TODO"))
-
+  'B)
 (define white ; white: form
-  (raise "TODO"))
+  'W)
 
 
-;;; how to pprint
+;;; complex tile
 ;
-; Make the pprint function to print tiles on the screen using the
-; characters 'W' for the white tile and 'B' for the black tile.  For
-; example, (pprint (glue black black black white)) should prints tiles
-; as follows.
+; An array tile looks like:
+; (cons 'array (list row_1 row_2 ... row_n)),
+; for each row_i = (list cell_i1 ... cell_in).
 ;
+; Examples:
+; 1.
+; (cons 'array (list (list 'B 'B) (list 'W 'W)))
 ; BB
-; WB
-
-
-;;; implementation with array
+; WW
+;
+; 2.
+; (cons 'array (list (list 'B 'B 'B 'B) (list 'B 'B 'B 'B) (list 'W 'W 'B 'B) (list 'W 'W 'B 'B)))
+; BBBB
+; BBBB
+; WWBB
+; WWBB
+;
+;
+; An tree tile looks like:
+; (cons 'tree (list subtree_nw subtree_ne subtree_se subtree_sw)).
+;
+; Examples:
+; 1.
+; (cons 'tree (list 'B 'B 'W 'B))
+; BB
+; BW
+;
+; 2.
+; (cons 'tree (list (list 'B 'B 'B 'W) (list 'B 'B 'W 'B) (list 'B 'W 'B 'B) (list 'W 'B 'B 'B)))
+; BBBB
+; WBBW
+; WBBW
+; BBBB
+;
+; See hw5-1-grade.rkt for more details on grading array and tree representation.
 
 (define (glue-array-from-tree nw ne se sw) ; glue-array-from-tree: form * form * form * form -> form
-  (raise "TODO"))
+  'TODO)
 
 (define (glue-array-from-array nw ne se sw) ; glue-array-from-array: form * form * form * form -> form
-  (raise "TODO"))
+  'TODO)
+
+(define (glue-tree-from-tree nw ne se sw) ; glue-tree-from-tree: form * form * form * form -> form
+  'TODO)
+
+(define (glue-tree-from-array nw ne se sw) ; glue-tree-from-array: form * form * form * form -> form
+  'TODO)
 
 (define (rotate-array f) ; rotate-array: form -> form
-  (raise "TODO"))
+  'TODO)
 
-(define (neighbor-array loc f) ; neighbor-array: location * form -> int
-  (raise "TODO"))
+(define (neighbor-array location f) ; neighbor-array: location * form -> int
+  'TODO)
 
 ; In the document, it is said to have type form -> void, but implement
 ; as form -> string.
+; Read hw5-1-grade.rkt for formatting.
 (define (pprint-array f) ; pprint-array: form -> string
-  (raise "TODO"))
+  'TODO)
 
 (define (is-array? f) ; is-array?: form -> bool
-  (raise "TODO"))
+  (cond [(equal? 'B f) #t]
+        [(equal? 'W f) #t]
+        [(equal? 'array (car f)) #t]
+        [else #f]))
 
 
 ;;; implementation with tree
 
-(define (glue-tree-from-tree nw ne se sw) ; glue-tree-from-tree: form * form * form * form -> form
-  (raise "TODO"))
-
-(define (glue-tree-from-array nw ne se sw) ; glue-tree-from-array: form * form * form * form -> form
-  (raise "TODO"))
-
 (define (rotate-tree f) ; rotate-tree: form -> form
-  (raise "TODO"))
+  'TODO)
 
 (define (neighbor-tree loc f) ; neighbor-tree: location * form -> int
-  (raise "TODO"))
+  'TODO)
 
 ; In the document, it is said to have type form -> void, but implement
 ; as form -> string.
 (define (pprint-tree f) ; pprint-tree: form -> string
-  (raise "TODO"))
+  'TODO)
 
 (define (is-tree? f) ; is-tree?: form -> bool
-  (raise "TODO"))
+  (cond [(equal? 'B f) #t]
+        [(equal? 'W f) #t]
+        [(equal? 'tree (car f)) #t]
+        [else #f]))
 
 
 ;;; conversions 
 
 (define (array-to-tree f) ; array-to-tree: form -> form
-  (raise "TODO"))
+  'TODO)
 
 (define (tree-to-array f) ; tree-to-array: form -> form
-  (raise "TODO"))
+  'TODO)
 
 
 ;;; interfaces
 
 (define (glue nw ne se sw) ; glue: form * form * form * form -> form
-  (raise "TODO"))
+  'TODO)
 
 (define (rotate f) ; rotate: form -> form
-  (raise "TODO"))
+  (if (is-array? f)
+      (rotate-array f)
+      (rotate-tree f)))
 
 (define (neighbor loc f) ; neighbor: location * form -> int
-  (raise "TODO"))
+  (if (is-array? f)
+      (neighbor-array loc f)
+      (neighbor-tree loc f)))
 
 ; In the document, it is said to have type form -> void, but implement
 ; as form -> string.
 (define (pprint f) ; pprint: form -> string
-  (raise "TODO"))
+  (if (is-array? f)
+      (pprint-array f)
+      (pprint-tree f)))

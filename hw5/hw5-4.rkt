@@ -1,5 +1,6 @@
 #lang racket
 
+;;; It is recommended to see hw5-2-grade.rkt before doing your HW.
 
 ; If these statements are omitted, your submission will be graded 0.
 (provide catchYou)
@@ -15,4 +16,4 @@
 ; Only stores appeared in the input are considered as the starting
 ; point, and those only should be output.
 (define (catchYou model step)
-  (raise "TODO"))
+  'TODO)

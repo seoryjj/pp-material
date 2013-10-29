@@ -45,9 +45,9 @@
   (raise "TODO"))
 
 (define (differentiate v e)
-  (cond [(is-const? e) 0]
+  (cond [(is-const? e) (const 0)]
         [(is-var? e)
-         (if (equal? (var-var e) v) 1 0)]
+         (const (if (equal? (var-var e) v) 1 0))]
         [(is-plus? e)
          (raise "TODO")]
         [(is-minus? e)
@@ -56,7 +56,7 @@
          (raise "TODO")]))
 
 (define e1 ; 3x - 1
-  (plus (multiply (const 2) (var "x"))
+  (plus (multiply (const 3) (var "x"))
         (minus (const 1))))
 (print (differentiate "x" e1))
 (printf "\n")

@@ -1,6 +1,8 @@
 #lang racket
 
 
+;;; It is recommended to see hw5-2-grade.rkt before doing your HW.
+
 ;;; If these statements are omitted, your submission will be graded 0.
 
 (provide equal)
@@ -19,10 +21,14 @@
 
 ;;; interfaces
 (define (equal f g) ; equal: form * form -> form
-  (raise "TODO"))
+  'TODO)
 
 (define (size f) ; size: form -> int
-  (raise "TODO"))
+  'TODO)
 
 (define (beautiful f) ; beautiful: form -> bool
-  (raise "TODO"))
+  (define (beautiful-sym f)
+    'TODO)
+  (define (beautiful-neighbor f)
+    'TODO)
+  (or (beautiful-sym f) (beautiful-neighbor f)))
