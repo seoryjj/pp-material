@@ -4,7 +4,7 @@
   (define rules null)
   (define state "initial")
 
-  (define init
+  (define (init)
     (set! rules null)
     (set! state "initial"))
 
