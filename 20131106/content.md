@@ -48,6 +48,8 @@ string-append: contract violation
 * 다음과 같은 에러 메시지가 나오면 좋겠습니다: ```type error: (leaf-value t)
   is an int, but is expected to be a string.```
 
+해결은 수업시간에 배운 것처럼 정적 타입을 지원하는 언어를 사용하는
+것입니다! 이번 실습시간에는 OCaml을 사용해봅시다.
 
 ### OCaml ###
 
@@ -124,6 +126,9 @@ expression was expected of type string`와 같은 친절하고 도움이 되는
     [Tuareg](http://www.emacswiki.org/emacs/TuaregMode)이라는
     플러그인도 있습니다.
 * 그 외의 경우, [Eclipse](http://eclipse.org) +
-  [OcaIDE](http://www.algo-prog.info/ocaide/)를 추천합니다.
+  [OcaIDE](http://www.algo-prog.info/ocaide/)를 추천합니다. 구체적인
+  설치 방법은
+  [지난 실습자료](http://ropas.snu.ac.kr/~ta/4190.210/12/practice/ocaml_tutorial.pdf)를
+  참조하세요.
 * 어찌되었건 1) OCaml syntax highlighting이 되는 편집기와 2) OCaml
   코드를 실행할 수 있는 인터프리터 혹은 컴파일러가 구비되면 됩니다.
