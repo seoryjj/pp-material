@@ -1,3 +1,7 @@
 content*.html
 **.md~
+a.out
+**.cmi
+**.cmo
 .DS_Store
+
