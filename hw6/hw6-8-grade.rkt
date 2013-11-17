@@ -16,7 +16,7 @@
 (define condC
   (mustAnd (mustItems '(1))
            (mustHaveExceptFor (mustBeTheSame 'A)
-                              (mustItems '(3)))))
+                              '(3))))
 
 (output
  (lambda ()
