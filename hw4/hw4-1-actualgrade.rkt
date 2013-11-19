@@ -2,7 +2,7 @@
 
 (require racket/match)
 (require "common-grade.rkt")
-(require "submission.rkt")
+(require "hw4-1.rkt")
 
 (define (lookup key m)
   (match

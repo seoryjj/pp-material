@@ -59,6 +59,6 @@
 (output (lambda () (equal? "WBBW\nBBBB\nBBBB\nWBBW\n"
                                (pprint compound1-array))))
 
-(output (lambda () (equal? 3 (neighbor-array (list 0 0) compound1-tree))))
-(output (lambda () (equal? 4 (neighbor-array (list 0 1) compound1-array))))
-(output (lambda () (equal? 7 (neighbor-array (list 0 2) compound1-array))))
+(output (lambda () (equal? 3 (neighbor (list 0 0) compound1-tree))))
+(output (lambda () (equal? 4 (neighbor (list 0 1) compound1-array))))
+(output (lambda () (equal? 7 (neighbor (list 0 2) compound1-array))))
