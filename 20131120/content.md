@@ -10,9 +10,8 @@
 
 [int.ml](int.ml)
 
-모듈은 OCaml에서 타입, 변수, 함수 정의의 모음입니다.  예를 들어,
-정수타입과 이에 대한 연산들을 다음과 같이 정의할 수 있고, 이들을 모두
-모듈로 정의할 수 있습니다.
+모듈은 타입, 변수, 함수 정의의 모음입니다.  예를 들어, 정수타입과 이에
+대한 연산 정의를 다음과 같이 모아 모듈을 정의할 수 있습니다.
 
 ```ocaml
 module MyInt = 
@@ -28,8 +27,8 @@ let three : MyInt.t = MyInt.add one two
 let _ = print_endline (MyInt.to_string three)
 ```
 
-위에서 보시는 것과 같이 모듈 안의 내용물을 사용하는 방법은
-"모듈이름.타입", "모듈이름.변수", "모듈이름.함수"입니다.
+모듈 안의 내용물을 사용하는 방법은 "모듈이름.타입", "모듈이름.변수",
+"모듈이름.함수"입니다.
 
 ## 모듈타입 ##
 
@@ -39,7 +38,7 @@ let _ = print_endline (MyInt.to_string three)
 * 어떤 모듈 안에 어떤 타입이 정의되어 있어야 함.
 * 어떤 모듈 안에 어떤 변수/함수가 어떤 타입으로 정의되어 있어야 함.
 
-위의 예제에서 보인 모듈 `MyInt`의 타입은 다음과 같습니다.
+위 예제의 모듈 `MyInt`의 모듈타입은 다음과 같습니다.
 
 ```ocaml
 module type NumType = 
@@ -50,17 +49,15 @@ sig
 end
 ```
 
-`Num`이라는 모듈타입의 내용은 다음과 같습니다.
-
-* 타입 `t` 정의가 있어야 함.
+* 타입 `t`의 정의가 있어야 함.
 * `t -> t -> t`타입의 `add` 정의가 있어야 함.
 * `t -> string` 타입의 `to_string` 정의가 있어야 함.
 
 ## 모듈함수 ##
 
-모듈을 인자로 받아서 모듈을 내놓는 모듈함수를 정의해 봅시다.
-여기에서는 두 개의 `Num`모듈타입의 모듈을 인자로 받아서 `Num`모듈타입의
-모듈을 내놓는 `Pair`모듈함수를 정의해 보겠습니다.
+모듈을 인자로 받고 모듈을 내놓는 모듈함수를 정의해 봅시다.  예로
+`Num`모듈타입의 두 모듈을 인자로 받아 같은 모듈타입의 모듈을 내놓는
+`Pair`모듈함수를 정의해 보겠습니다.
 
 ```ocaml
 module Pair (M:NumType) (N:NumType) =
@@ -84,16 +81,16 @@ module MyIntPairPair = Pair (MyIntPair) (MyInt)
 let _ = print_endline (MyIntPairPair.to_string (one_two,three))
 ```
 
-`Pair`모듈함수를 이용해서 만든 `MyIntPair`모듈은 `MyInt.t`의 쌍에 대한
+`Pair`모듈함수의 출력인 `MyIntPair`모듈은 `MyInt.t`의 쌍에 대한
 `add`함수와 `to_string`함수를 가지게 됩니다.  더 재미난 것은
-`MyIntPair` 또한 `NumType`을 가지므로 `Pair`모듈함수의 인자로 쓰일 수
-있습니다.
+`MyIntPair`모듈 또한 `NumType`모듈타입을 가지므로 `Pair`모듈함수의
+인자로 쓰일 수 있습니다.
 
 ## Set ##
 
 [set.ml](set.ml)
 
-OCaml에서 제공하는 기본 라이브러리 Set모듈을 사용해 봅시다.
+OCaml에서 제공하는 Set라이브러리를 사용해 봅시다.
 
 http://caml.inria.fr/pub/docs/manual-ocaml/libref/Set.html
 
@@ -121,15 +118,13 @@ let _ = IntSet.elements (IntSet.union s t)
 let _ = IntSet.elements (IntSet.diff s t)
 ```
 
-위의 예제에서는 Set라이브러리의 `Set.Make`모듈함수를 이용하여 정수집합
-`IntSet`을 구현합니다.  정수의 집합을 만들기 위해서는
-`Set.OrderedType`모듈타입의 모듈을 `Set.Make`모듈함수의 인자로 넘겨
-주어야 합니다.  `Set.OrderedType`은 다음의 두 가지 정의를 요구합니다.
+Set라이브러리의 `Set.Make`모듈함수를 이용하여 정수집합 `IntSet`을
+구현합니다.  `Set.Make`모듈함수의 인자는 `Set.OrderedType`모듈타입을
+가져야 하고, 이는 다음 두 가지 정의를 요구합니다.
 
-* `t`타입: 집합의 각 원소의 타입.
-* `compare`함수: 두 `t`타입의 값(`x`,`y`)을 받아서 크기를 비교함.
-  `x`와 `y`가 같으면 0, `x`가 더 크면 양수, `y`가 더 크면 음수를
-  출력함.
+* `t`타입: 집합에서 각 원소의 타입.
+* `compare`함수: `t`타입의 두 값(`x`,`y`)을 받아서 크기 비교.  `x`와
+  `y`가 같으면 0, `x`가 더 크면 양수, `y`가 더 크면 음수 출력.
 
 ## 실습 ##
 
@@ -146,8 +141,8 @@ http://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.html
 
 1. `StateOrder`, `InputOrder`모듈: `compare`함수는 `Set.OrderedType`에
 정의되어 있는 `compare`와 동일.
-2. `Pair`모듈타입: `Map.OrderedType`모듈타입의 두 모듈을 받아 쌍의
-모듈 생성.
+2. `Pair`모듈타입: `Map.OrderedType`모듈타입의 두 모듈을 받아 쌍의 모듈
+생성.
 
 ### 유한상태기계 ###
 

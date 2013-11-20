@@ -1,12 +1,12 @@
 exception TODO
 
-module StateOrder = 
+module State = 
 struct 
   type t = Initial | Coined
   let compare (x:t) (y:t) : int = raise TODO
 end
 
-module InputOrder = 
+module Input = 
 struct 
   type t = InsertCoin | PushCola | PushCider | PushReturn
   let compare (x:t) (y:t) : int = raise TODO
@@ -23,67 +23,51 @@ struct
   let compare (x:t) (y:t) : int = raise TODO
 end
 
-module StateInputOrder = Pair (StateOrder) (InputOrder)
-module FsmMap = Map.Make (StateInputOrder)
+module StateInput = Pair (State) (Input)
+module FsmMap = Map.Make (StateInput)
 
 let fsm = FsmMap.empty
 let fsm = FsmMap.add 
-  (StateOrder.Initial,InputOrder.InsertCoin) 
-  (StateOrder.Coined,Output.Nothing) 
-  fsm
+  (State.Initial,Input.InsertCoin) (State.Coined,Output.Nothing) fsm
 let fsm = FsmMap.add 
-  (StateOrder.Initial,InputOrder.PushCola)
-  (StateOrder.Initial,Output.Nothing)
-  fsm
+  (State.Initial,Input.PushCola) (State.Initial,Output.Nothing) fsm
 let fsm = FsmMap.add
-  (StateOrder.Initial,InputOrder.PushCider)
-  (StateOrder.Coined,Output.Nothing)
-  fsm
+  (State.Initial,Input.PushCider) (State.Coined,Output.Nothing) fsm
 let fsm = FsmMap.add
-  (StateOrder.Initial,InputOrder.PushReturn)
-  (StateOrder.Coined,Output.Nothing) 
-  fsm
+  (State.Initial,Input.PushReturn) (State.Coined,Output.Nothing) fsm
 let fsm = FsmMap.add 
-  (StateOrder.Coined,InputOrder.InsertCoin)
-  (StateOrder.Coined,Output.Coin)
-  fsm
+  (State.Coined,Input.InsertCoin) (State.Coined,Output.Coin) fsm
 let fsm = FsmMap.add 
-  (StateOrder.Coined,InputOrder.PushCola)
-  (StateOrder.Initial,Output.Cola) 
-  fsm
+  (State.Coined,Input.PushCola) (State.Initial,Output.Cola) fsm
 let fsm = FsmMap.add
-  (StateOrder.Coined,InputOrder.PushCider)
-  (StateOrder.Initial,Output.Cider) 
-  fsm
-let fsm = FsmMap.add
-  (StateOrder.Coined,InputOrder.PushReturn)
-  (StateOrder.Initial,Output.Coin)
-  fsm
+  (State.Coined,Input.PushCider) (State.Initial,Output.Cider) fsm
+let fsm = FsmMap.add 
+  (State.Coined,Input.PushReturn) (State.Initial,Output.Coin) fsm
 
-let result1 = FsmMap.find (StateOrder.Initial,InputOrder.InsertCoin) fsm
-let result2 = FsmMap.find (StateOrder.Initial,InputOrder.PushCider) fsm
-let result3 = FsmMap.find (StateOrder.Coined,InputOrder.PushCola) fsm
-let result4 = FsmMap.find (StateOrder.Coined,InputOrder.InsertCoin) fsm
-let result5 = FsmMap.find (StateOrder.Coined,InputOrder.PushCider) fsm
+let result1 = FsmMap.find (State.Initial,Input.InsertCoin) fsm
+let result2 = FsmMap.find (State.Initial,Input.PushCider) fsm
+let result3 = FsmMap.find (State.Coined,Input.PushCola) fsm
+let result4 = FsmMap.find (State.Coined,Input.InsertCoin) fsm
+let result5 = FsmMap.find (State.Coined,Input.PushCider) fsm
 
 let _ =
-  if result1 = (StateOrder.Coined, Output.Nothing)
+  if result1 = (State.Coined, Output.Nothing)
   then print_endline "o"
   else print_endline "x"
 let _ =
-  if result2 = (StateOrder.Coined, Output.Nothing)
+  if result2 = (State.Coined, Output.Nothing)
   then print_endline "o"
   else print_endline "x"
 let _ =
-  if result3 = (StateOrder.Initial, Output.Cola)
+  if result3 = (State.Initial, Output.Cola)
   then print_endline "o"
   else print_endline "x"
 let _ =
-  if result4 = (StateOrder.Coined, Output.Coin)
+  if result4 = (State.Coined, Output.Coin)
   then print_endline "o"
   else print_endline "x"
 let _ =
-  if result5 = (StateOrder.Initial, Output.Cider)
+  if result5 = (State.Initial, Output.Cider)
   then print_endline "o"
   else print_endline "x"
 
@@ -91,43 +75,38 @@ module type FsmType =
 sig
   type t
   val init : t
-  val add_rule : StateOrder.t -> InputOrder.t -> 
-    StateOrder.t -> Output.t -> t -> t
-  val step : StateOrder.t -> InputOrder.t -> t -> StateOrder.t * Output.t
+  val add_rule : State.t -> Input.t -> State.t -> Output.t -> t -> t
+  val step : State.t -> Input.t -> t -> State.t * Output.t
 end
 
 module Fsm = 
 struct
-  type t = (StateOrder.t * Output.t) FsmMap.t
+  type t = (State.t * Output.t) FsmMap.t
   let init : t = FsmMap.empty
-  let add_rule (is:StateOrder.t) (i:InputOrder.t) 
-      (os:StateOrder.t) (o:Output.t) (fsm:t) : t =
+  let add_rule (is:State.t) (i:Input.t) (os:State.t) (o:Output.t) (fsm:t) : t =
     raise TODO
-  let step (s:StateOrder.t) (i:InputOrder.t) (fsm:t) 
-      : StateOrder.t * Output.t =
+  let step (s:State.t) (i:Input.t) (fsm:t) : State.t * Output.t =
     raise TODO
 end
 
 module FsmRunMake (F:FsmType) =
 struct 
-  let rec run (s:StateOrder.t) (is:InputOrder.t list) (fsm:F.t) 
-      : StateOrder.t * Output.t list = 
+  let rec run (s:State.t) (is:Input.t list) (fsm:F.t) 
+      : State.t * Output.t list = 
     raise TODO
 end
 
 module FsmRun = FsmRunMake (Fsm)
 
-let result = FsmRun.run StateOrder.Initial
-  [InputOrder.InsertCoin;InputOrder.PushCola;InputOrder.PushCider;
-   InputOrder.PushReturn;InputOrder.InsertCoin;InputOrder.PushCola;
-   InputOrder.PushCider;InputOrder.PushReturn] 
+let result = FsmRun.run State.Initial
+  [Input.InsertCoin; Input.PushCola; Input.PushCider; Input.PushReturn;
+   Input.InsertCoin; Input.PushCola; Input.PushCider; Input.PushReturn] 
   fsm
 
 let _ = 
   if result = 
-    (StateOrder.Initial,
-     [Output.Nothing; Output.Cola; Output.Nothing; 
-      Output.Coin; Output.Nothing; Output.Cola; 
-      Output.Nothing; Output.Coin])
+    (State.Initial,
+     [Output.Nothing; Output.Cola; Output.Nothing; Output.Coin;
+      Output.Nothing; Output.Cola; Output.Nothing; Output.Coin])
   then print_endline "o"
   else print_endline "x"
