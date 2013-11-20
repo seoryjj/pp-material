@@ -91,10 +91,195 @@ let _ = print_endline (MyIntPairPair.to_string (one_two,three))
 `MyIntPair` 또한 `NumType`을 가지므로 `Pair`모듈함수의 인자로 쓰일 수
 있습니다.
 
+## Set ##
+
+OCaml에서 제공하는 기본 라이브러리 Set모듈을 사용해 봅시다.
+
+http://caml.inria.fr/pub/docs/manual-ocaml/libref/Set.html
+
+```ocaml
+module IntOrder =
+struct 
+  type t = int
+  let compare (x:t) (y:t) = x-y
+end
+
+module IntSet = Set.Make (IntOrder)
+
+let s = IntSet.empty
+let s = IntSet.add 2 s
+let s = IntSet.add 4 s
+let s = IntSet.add 6 s
+
+let t = IntSet.empty
+let t = IntSet.add 3 t
+let t = IntSet.add 4 t
+let t = IntSet.add 5 t
+let _ = IntSet.elements t
+
+let _ = IntSet.elements (IntSet.union s t)
+let _ = IntSet.elements (IntSet.diff s t)
+```
+
 ## 실습 ##
 
+### 유한상태기계 ###
 
+유한상태기계를 모듈로 작성해 봅시다.  아래의 빈칸을 채우세요.
 
-### Set, Map ###
+```ocaml
+exception TODO
 
+module type FsmType =
+sig
+  type state
+  type input
+  type output
+  type t
 
+  val init : t
+  val add_rule : state -> input -> state -> output -> t -> t
+  val step : state -> input -> t -> state * output
+end
+
+module type FsmRunType =
+sig
+  type state
+  type input
+  type output
+  type t
+
+  val run : state -> input list -> t -> state * output list
+end
+
+module Fsm = 
+struct
+  type state = Initial | Coined
+  type input = InsertCoin | PushCola | PushCider | PushReturn
+  type output = Coin | Cola | Cider | Nothing
+  type t = ((state * input) * (state * output) ) list
+
+  let init : t = raise TODO
+  let add_rule (is:state) (i:input) (os:state) (o:output) (fsm:t) : t = 
+    raise TODO
+  let step (s:state) (i:input) (fsm:t) : state * output = raise TODO
+end
+
+let fsm = Fsm.init
+let fsm = Fsm.add_rule Fsm.Initial Fsm.InsertCoin Fsm.Coined Fsm.Nothing fsm
+let fsm = Fsm.add_rule Fsm.Initial Fsm.PushCola Fsm.Initial Fsm.Nothing fsm
+let fsm = Fsm.add_rule Fsm.Initial Fsm.PushCider Fsm.Initial Fsm.Nothing fsm
+let fsm = Fsm.add_rule Fsm.Initial Fsm.PushReturn Fsm.Initial Fsm.Nothing fsm
+let fsm = Fsm.add_rule Fsm.Coined Fsm.InsertCoin Fsm.Coined Fsm.Coin fsm
+let fsm = Fsm.add_rule Fsm.Coined Fsm.PushCola Fsm.Initial Fsm.Cola fsm
+let fsm = Fsm.add_rule Fsm.Coined Fsm.PushCider Fsm.Initial Fsm.Cider fsm
+let fsm = Fsm.add_rule Fsm.Coined Fsm.PushReturn Fsm.Initial Fsm.Coin fsm
+
+let _ = Fsm.step Fsm.Initial Fsm.InsertCoin fsm
+let _ = Fsm.step Fsm.Initial Fsm.PushCider fsm
+let _ = Fsm.step Fsm.Coined Fsm.PushCola fsm
+let _ = Fsm.step Fsm.Coined Fsm.InsertCoin fsm
+let _ = Fsm.step Fsm.Coined Fsm.PushCider fsm
+
+module FsmRunMake (F:FsmType) : FsmRunType 
+  with type state = F.state 
+  with type input = F.input
+  with type output = F.output
+  with type t = F.t =
+struct 
+  type state = F.state
+  type input = F.input
+  type output = F.output
+  type t = F.t
+
+  let rec run (s:state) (is:input list) (fsm:t) : state * output list = 
+    raise TODO
+end
+
+module FsmRun = FsmRunMake (Fsm)
+
+let result = FsmRun.run Fsm.Coined 
+  [Fsm.InsertCoin;Fsm.PushCola;Fsm.InsertCoin;
+   Fsm.InsertCoin;Fsm.PushCider;Fsm.PushCider] 
+  fsm
+
+let _ = 
+  if result = 
+    (Fsm.Initial,
+     [Fsm.Coin; Fsm.Cola; Fsm.Nothing; Fsm.Coin; Fsm.Cider; Fsm.Nothing])
+  then print_endline "o"
+  else print_endline "x"
+```
+
+### Map ###
+
+OCaml에서 제공하는 기본 라이브러리 Map모듈을 사용하여 유한상태기계의
+규칙들을 저장하는 맵을 만들어 봅시다.  아래의 빈칸을 채우세요.
+
+http://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.html
+
+```ocaml
+exception TODO
+
+type state = Initial | Coined
+type input = InsertCoin | PushCola | PushCider | PushReturn
+type output = Coin | Cola | Cider | Nothing
+
+module StateOrder = 
+struct 
+  type t = raise TODO
+  let compare (x:t) (y:t) = raise TODO
+end
+
+module InputOrder = 
+struct 
+  type t = raise TODO
+  let compare (x:t) (y:t) = raise TODO
+end
+
+module Pair (M:Map.OrderedType) (N:Map.OrderedType) =
+struct 
+  type t = raise TODO
+  let compare (x:t) (y:t) = raise TODO
+end
+
+module StateInputOrder = Pair (StateOrder) (InputOrder)
+module FsmMap = Map.Make (StateInputOrder)
+
+let fsm = FsmMap.empty
+let fsm = FsmMap.add (Initial,InsertCoin) (Coined,Nothing) fsm
+let fsm = FsmMap.add (Initial,PushCola) (Initial,Nothing) fsm
+let fsm = FsmMap.add (Initial,PushCider) (Coined,Nothing) fsm
+let fsm = FsmMap.add (Initial,PushReturn) (Coined,Nothing) fsm
+let fsm = FsmMap.add (Coined,InsertCoin) (Coined,Coin) fsm
+let fsm = FsmMap.add (Coined,PushCola) (Initial,Cola) fsm
+let fsm = FsmMap.add (Coined,PushCider) (Initial,Cider) fsm
+let fsm = FsmMap.add (Coined,PushReturn) (Initial,Coin) fsm
+
+let result1 = FsmMap.find (Initial,InsertCoin) fsm
+let result2 = FsmMap.find (Initial,PushCider) fsm
+let result3 = FsmMap.find (Coined,PushCola) fsm
+let result4 = FsmMap.find (Coined,InsertCoin) fsm
+let result5 = FsmMap.find (Coined,PushCider) fsm
+
+let _ =
+  if result1 = (Coined, Nothing)
+  then print_endline "o"
+  else print_endline "x"
+let _ =
+  if result2 = (Coined, Nothing)
+  then print_endline "o"
+  else print_endline "x"
+let _ =
+  if result3 = (Initial, Cola)
+  then print_endline "o"
+  else print_endline "x"
+let _ =
+  if result4 = (Coined, Coin)
+  then print_endline "o"
+  else print_endline "x"
+let _ =
+  if result5 = (Initial, Cider)
+  then print_endline "o"
+  else print_endline "x"
+```
