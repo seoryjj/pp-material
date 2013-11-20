@@ -17,7 +17,7 @@ sig
   val to_string : t -> string
 end
 
-module Pair (M:NumType) (N:NumType) : NumType with type t = M.t * N.t =
+module Pair (M:NumType) (N:NumType) =
 struct
   type t = M.t * N.t
   let add (x:t) (y:t) = 

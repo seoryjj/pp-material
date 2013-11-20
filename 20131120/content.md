@@ -19,17 +19,15 @@ struct
   let add (x:t) (y:t) : t = x+y
   let to_string (x:t) = string_of_int x  
 end
-```
 
-모듈 안의 내용물을 사용하는 방법은 "모듈이름.타입", "모듈이름.변수",
-"모듈이름.함수"입니다.  다음 코드를 실행시켜 보세요.
-
-```ocaml
 let one : MyInt.t = 1
 let two : MyInt.t = 2
 let three : MyInt.t = MyInt.add one two
 let _ = print_endline (MyInt.to_string three)
 ```
+
+위에서 보시는 것과 같이 모듈 안의 내용물을 사용하는 방법은
+"모듈이름.타입", "모듈이름.변수", "모듈이름.함수"입니다.
 
 ## 모듈타입 ##
 
@@ -39,10 +37,10 @@ let _ = print_endline (MyInt.to_string three)
 * 어떤 모듈 안에 어떤 타입이 정의되어 있어야 함.
 * 어떤 모듈 안에 어떤 변수/함수가 어떤 타입으로 정의되어 있어야 함.
 
-예제에서 보인 모듈의 타입은 다음과 같습니다.
+위의 예제에서 보인 모듈 `MyInt`의 타입은 다음과 같습니다.
 
 ```ocaml
-module type Num = 
+module type NumType = 
 sig
   type t
   val add : t -> t -> t
@@ -60,12 +58,14 @@ end
 
 ## 모듈함수 ##
 
+[int.ml](int.ml)
+
 모듈을 인자로 받아서 모듈을 내놓는 모듈함수를 정의해 봅시다.
 여기에서는 두 개의 `Num`모듈타입의 모듈을 인자로 받아서 `Num`모듈타입의
 모듈을 내놓는 `Pair`모듈함수를 정의해 보겠습니다.
 
 ```ocaml
-module Pair (M:NumType) (N:NumType) : NumType with type t = M.t * N.t =
+module Pair (M:NumType) (N:NumType) =
 struct
   type t = M.t * N.t
   let add (x:t) (y:t) = 
@@ -93,6 +93,8 @@ let _ = print_endline (MyIntPairPair.to_string (one_two,three))
 
 ## Set ##
 
+[set.ml](set.ml)
+
 OCaml에서 제공하는 기본 라이브러리 Set모듈을 사용해 봅시다.
 
 http://caml.inria.fr/pub/docs/manual-ocaml/libref/Set.html
@@ -101,7 +103,7 @@ http://caml.inria.fr/pub/docs/manual-ocaml/libref/Set.html
 module IntOrder =
 struct 
   type t = int
-  let compare (x:t) (y:t) = x-y
+  let compare (x:t) (y:t) : t = x-y
 end
 
 module IntSet = Set.Make (IntOrder)
@@ -121,95 +123,19 @@ let _ = IntSet.elements (IntSet.union s t)
 let _ = IntSet.elements (IntSet.diff s t)
 ```
 
+위의 예제에서는 Set라이브러리의 `Set.Make`모듈함수를 이용하여 정수집합
+`IntSet`을 구현합니다.  정수의 집합을 만들기 위해서는
+`Set.OrderedType`모듈타입의 모듈을 `Set.Make`모듈함수의 인자로 넘겨
+주어야 합니다.  `Set.OrderedType`은 다음의 두 가지 정의를 요구합니다.
+
+* `t`타입: 집합의 각 원소의 타입.
+* `compare`함수: 두 `t`타입의 값(`x`,`y`)을 받아서 크기를 비교함.
+  `x`와 `y`가 같으면 0, `x`가 더 크면 양수, `y`가 더 크면 음수를
+  출력함.
+
 ## 실습 ##
 
-### 유한상태기계 ###
-
-유한상태기계를 모듈로 작성해 봅시다.  아래의 빈칸을 채우세요.
-
-```ocaml
-exception TODO
-
-module type FsmType =
-sig
-  type state
-  type input
-  type output
-  type t
-
-  val init : t
-  val add_rule : state -> input -> state -> output -> t -> t
-  val step : state -> input -> t -> state * output
-end
-
-module type FsmRunType =
-sig
-  type state
-  type input
-  type output
-  type t
-
-  val run : state -> input list -> t -> state * output list
-end
-
-module Fsm = 
-struct
-  type state = Initial | Coined
-  type input = InsertCoin | PushCola | PushCider | PushReturn
-  type output = Coin | Cola | Cider | Nothing
-  type t = ((state * input) * (state * output) ) list
-
-  let init : t = raise TODO
-  let add_rule (is:state) (i:input) (os:state) (o:output) (fsm:t) : t = 
-    raise TODO
-  let step (s:state) (i:input) (fsm:t) : state * output = raise TODO
-end
-
-let fsm = Fsm.init
-let fsm = Fsm.add_rule Fsm.Initial Fsm.InsertCoin Fsm.Coined Fsm.Nothing fsm
-let fsm = Fsm.add_rule Fsm.Initial Fsm.PushCola Fsm.Initial Fsm.Nothing fsm
-let fsm = Fsm.add_rule Fsm.Initial Fsm.PushCider Fsm.Initial Fsm.Nothing fsm
-let fsm = Fsm.add_rule Fsm.Initial Fsm.PushReturn Fsm.Initial Fsm.Nothing fsm
-let fsm = Fsm.add_rule Fsm.Coined Fsm.InsertCoin Fsm.Coined Fsm.Coin fsm
-let fsm = Fsm.add_rule Fsm.Coined Fsm.PushCola Fsm.Initial Fsm.Cola fsm
-let fsm = Fsm.add_rule Fsm.Coined Fsm.PushCider Fsm.Initial Fsm.Cider fsm
-let fsm = Fsm.add_rule Fsm.Coined Fsm.PushReturn Fsm.Initial Fsm.Coin fsm
-
-let _ = Fsm.step Fsm.Initial Fsm.InsertCoin fsm
-let _ = Fsm.step Fsm.Initial Fsm.PushCider fsm
-let _ = Fsm.step Fsm.Coined Fsm.PushCola fsm
-let _ = Fsm.step Fsm.Coined Fsm.InsertCoin fsm
-let _ = Fsm.step Fsm.Coined Fsm.PushCider fsm
-
-module FsmRunMake (F:FsmType) : FsmRunType 
-  with type state = F.state 
-  with type input = F.input
-  with type output = F.output
-  with type t = F.t =
-struct 
-  type state = F.state
-  type input = F.input
-  type output = F.output
-  type t = F.t
-
-  let rec run (s:state) (is:input list) (fsm:t) : state * output list = 
-    raise TODO
-end
-
-module FsmRun = FsmRunMake (Fsm)
-
-let result = FsmRun.run Fsm.Coined 
-  [Fsm.InsertCoin;Fsm.PushCola;Fsm.InsertCoin;
-   Fsm.InsertCoin;Fsm.PushCider;Fsm.PushCider] 
-  fsm
-
-let _ = 
-  if result = 
-    (Fsm.Initial,
-     [Fsm.Coin; Fsm.Cola; Fsm.Nothing; Fsm.Coin; Fsm.Cider; Fsm.Nothing])
-  then print_endline "o"
-  else print_endline "x"
-```
+[ex.ml](ex.ml)
 
 ### Map ###
 
@@ -221,65 +147,141 @@ http://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.html
 ```ocaml
 exception TODO
 
-type state = Initial | Coined
-type input = InsertCoin | PushCola | PushCider | PushReturn
-type output = Coin | Cola | Cider | Nothing
-
 module StateOrder = 
 struct 
-  type t = raise TODO
-  let compare (x:t) (y:t) = raise TODO
+  type t = Initial | Coined
+  let compare (x:t) (y:t) : int = raise TODO
 end
 
 module InputOrder = 
 struct 
-  type t = raise TODO
-  let compare (x:t) (y:t) = raise TODO
+  type t = InsertCoin | PushCola | PushCider | PushReturn
+  let compare (x:t) (y:t) : int = raise TODO
+end
+
+module Output = 
+struct 
+  type t = Coin | Cola | Cider | Nothing
 end
 
 module Pair (M:Map.OrderedType) (N:Map.OrderedType) =
 struct 
-  type t = raise TODO
-  let compare (x:t) (y:t) = raise TODO
+  type t = M.t * N.t
+  let compare (x:t) (y:t) : int = raise TODO
 end
 
 module StateInputOrder = Pair (StateOrder) (InputOrder)
 module FsmMap = Map.Make (StateInputOrder)
 
 let fsm = FsmMap.empty
-let fsm = FsmMap.add (Initial,InsertCoin) (Coined,Nothing) fsm
-let fsm = FsmMap.add (Initial,PushCola) (Initial,Nothing) fsm
-let fsm = FsmMap.add (Initial,PushCider) (Coined,Nothing) fsm
-let fsm = FsmMap.add (Initial,PushReturn) (Coined,Nothing) fsm
-let fsm = FsmMap.add (Coined,InsertCoin) (Coined,Coin) fsm
-let fsm = FsmMap.add (Coined,PushCola) (Initial,Cola) fsm
-let fsm = FsmMap.add (Coined,PushCider) (Initial,Cider) fsm
-let fsm = FsmMap.add (Coined,PushReturn) (Initial,Coin) fsm
+let fsm = FsmMap.add 
+  (StateOrder.Initial,InputOrder.InsertCoin) 
+  (StateOrder.Coined,Output.Nothing) 
+  fsm
+let fsm = FsmMap.add 
+  (StateOrder.Initial,InputOrder.PushCola)
+  (StateOrder.Initial,Output.Nothing)
+  fsm
+let fsm = FsmMap.add
+  (StateOrder.Initial,InputOrder.PushCider)
+  (StateOrder.Coined,Output.Nothing)
+  fsm
+let fsm = FsmMap.add
+  (StateOrder.Initial,InputOrder.PushReturn)
+  (StateOrder.Coined,Output.Nothing) 
+  fsm
+let fsm = FsmMap.add 
+  (StateOrder.Coined,InputOrder.InsertCoin)
+  (StateOrder.Coined,Output.Coin)
+  fsm
+let fsm = FsmMap.add 
+  (StateOrder.Coined,InputOrder.PushCola)
+  (StateOrder.Initial,Output.Cola) 
+  fsm
+let fsm = FsmMap.add
+  (StateOrder.Coined,InputOrder.PushCider)
+  (StateOrder.Initial,Output.Cider) 
+  fsm
+let fsm = FsmMap.add
+  (StateOrder.Coined,InputOrder.PushReturn)
+  (StateOrder.Initial,Output.Coin)
+  fsm
 
-let result1 = FsmMap.find (Initial,InsertCoin) fsm
-let result2 = FsmMap.find (Initial,PushCider) fsm
-let result3 = FsmMap.find (Coined,PushCola) fsm
-let result4 = FsmMap.find (Coined,InsertCoin) fsm
-let result5 = FsmMap.find (Coined,PushCider) fsm
+let result1 = FsmMap.find (StateOrder.Initial,InputOrder.InsertCoin) fsm
+let result2 = FsmMap.find (StateOrder.Initial,InputOrder.PushCider) fsm
+let result3 = FsmMap.find (StateOrder.Coined,InputOrder.PushCola) fsm
+let result4 = FsmMap.find (StateOrder.Coined,InputOrder.InsertCoin) fsm
+let result5 = FsmMap.find (StateOrder.Coined,InputOrder.PushCider) fsm
 
 let _ =
-  if result1 = (Coined, Nothing)
+  if result1 = (StateOrder.Coined, Output.Nothing)
   then print_endline "o"
   else print_endline "x"
 let _ =
-  if result2 = (Coined, Nothing)
+  if result2 = (StateOrder.Coined, Output.Nothing)
   then print_endline "o"
   else print_endline "x"
 let _ =
-  if result3 = (Initial, Cola)
+  if result3 = (StateOrder.Initial, Output.Cola)
   then print_endline "o"
   else print_endline "x"
 let _ =
-  if result4 = (Coined, Coin)
+  if result4 = (StateOrder.Coined, Output.Coin)
   then print_endline "o"
   else print_endline "x"
 let _ =
-  if result5 = (Initial, Cider)
+  if result5 = (StateOrder.Initial, Output.Cider)
+  then print_endline "o"
+  else print_endline "x"
+```
+
+### 유한상태기계 ###
+
+유한상태기계를 모듈로 작성해 봅시다.  아래의 빈칸을 채우세요.
+
+```ocaml
+module type FsmType =
+sig
+  type t
+  val init : t
+  val add_rule : StateOrder.t -> InputOrder.t -> 
+    StateOrder.t -> Output.t -> t -> t
+  val step : StateOrder.t -> InputOrder.t -> t -> StateOrder.t * Output.t
+end
+
+module Fsm = 
+struct
+  type t = (StateOrder.t * Output.t) FsmMap.t
+  let init : t = FsmMap.empty
+  let add_rule (is:StateOrder.t) (i:InputOrder.t) 
+      (os:StateOrder.t) (o:Output.t) (fsm:t) : t =
+    raise TODO
+  let step (s:StateOrder.t) (i:InputOrder.t) (fsm:t) 
+      : StateOrder.t * Output.t =
+    raise TODO
+end
+
+module FsmRunMake (F:FsmType) =
+struct 
+  let rec run (s:StateOrder.t) (is:InputOrder.t list) (fsm:F.t) 
+      : StateOrder.t * Output.t list = 
+    raise TODO
+end
+
+module FsmRun = FsmRunMake (Fsm)
+
+let result = FsmRun.run StateOrder.Initial
+  [InputOrder.InsertCoin;InputOrder.PushCola;InputOrder.PushCider;
+   InputOrder.PushReturn;InputOrder.InsertCoin;InputOrder.PushCola;
+   InputOrder.PushCider;InputOrder.PushReturn] 
+  fsm
+
+let _ = 
+  if result = 
+    (StateOrder.Initial,
+     [Output.Nothing; Output.Cola; Output.Nothing; 
+      Output.Coin; Output.Nothing; Output.Cola; 
+      Output.Nothing; Output.Coin])
   then print_endline "o"
   else print_endline "x"
 ```
