@@ -5,13 +5,28 @@
 
 (define (item-match? l r)
   (and (equal? (car l) (car r))
-       (let ([ratio (/ (cdr l) (cdr r))])
-         (and (< 0.99 ratio) (< ratio 1.01)))))
+       (or
+        (and (< (cdr l) 0.001) (< (cdr r) 0.001))
+        (let ([ratio (/ (cdr l) (cdr r))])
+         (and (< 0.99 ratio) (< ratio 1.01))))))
 
 (define (list-match? pred l r)
   (cond [(equal? l '()) (equal? r '())]
         [(equal? r '()) #f]
         [else (and (pred (car l) (car r)) (list-match? pred (cdr l) (cdr r)))]))
+
+(define (item-nonzero? sv)
+  (>= (cdr sv) 0.001))
+
+(define (symbol<? l r)
+  (string<? (symbol->string l) (symbol->string r)))
+
+(define (match? l r)
+  (let* ([ll (filter item-nonzero? l)]
+         [lll (sort ll (lambda (l r) (symbol<? (car l) (car r))))]
+         [rr (filter item-nonzero? r)]
+         [rrr (sort rr (lambda (l r) (symbol<? (car l) (car r))))])
+    (list-match? item-match? lll rrr)))
 
 (output
  (lambda ()
@@ -20,7 +35,7 @@
           [output (catchYou input 1)])
      (printf "~s~n" model-output)
      (printf "~s~n" output)
-     (list-match? item-match? model-output output))))
+     (match? model-output output))))
 
 (output
  (lambda ()
@@ -29,7 +44,7 @@
           [output (catchYou input 2)])
      (printf "~s~n" model-output)
      (printf "~s~n" output)
-     (list-match? item-match? model-output output))))
+     (match? model-output output))))
 
 (output
  (lambda ()
@@ -38,4 +53,4 @@
           [output (catchYou input 1000000)])
      (printf "~s~n" model-output)
      (printf "~s~n" output)
-     (list-match? item-match? model-output output))))
+     (match? model-output output))))
