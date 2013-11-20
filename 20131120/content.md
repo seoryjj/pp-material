@@ -139,8 +139,8 @@ http://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.html
 
 여러분이 완성해야 할 것은 다음과 같습니다.
 
-1. `StateOrder`, `InputOrder`모듈: `compare`함수는 `Set.OrderedType`에
-정의되어 있는 `compare`와 동일.
+1. `State`, `Input`모듈: `compare`함수는 `Set.OrderedType`에 정의되어
+있는 `compare`와 동일.
 2. `Pair`모듈타입: `Map.OrderedType`모듈타입의 두 모듈을 받아 쌍의 모듈
 생성.
 
