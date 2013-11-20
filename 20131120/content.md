@@ -8,6 +8,8 @@
 
 ## 모듈 ##
 
+[int.ml](int.ml)
+
 모듈은 OCaml에서 타입, 변수, 함수 정의의 모음입니다.  예를 들어,
 정수타입과 이에 대한 연산들을 다음과 같이 정의할 수 있고, 이들을 모두
 모듈로 정의할 수 있습니다.
@@ -50,15 +52,11 @@ end
 
 `Num`이라는 모듈타입의 내용은 다음과 같습니다.
 
-* `t`라는 타입이 정의되어 있어야 함.
-* 두 개의 `t` 타입의 값을 받아서 `t` 타입의 값을 내놓는 `add`라는
-  함수가 정의되어 있어야 함.
-* `t` 타입을 받아서 문자열을 내놓는 `to_string`이라는 함수가 정의되어
-  있어야 함.
+* 타입 `t` 정의가 있어야 함.
+* `t -> t -> t`타입의 `add` 정의가 있어야 함.
+* `t -> string` 타입의 `to_string` 정의가 있어야 함.
 
 ## 모듈함수 ##
-
-[int.ml](int.ml)
 
 모듈을 인자로 받아서 모듈을 내놓는 모듈함수를 정의해 봅시다.
 여기에서는 두 개의 `Num`모듈타입의 모듈을 인자로 받아서 `Num`모듈타입의
@@ -135,153 +133,28 @@ let _ = IntSet.elements (IntSet.diff s t)
 
 ## 실습 ##
 
-[ex.ml](ex.ml)
+[ex.ml](ex.ml)의 `TODO`부분을 모두 채우세요.
 
 ### Map ###
 
 OCaml에서 제공하는 기본 라이브러리 Map모듈을 사용하여 유한상태기계의
-규칙들을 저장하는 맵을 만들어 봅시다.  아래의 빈칸을 채우세요.
+규칙들을 저장하는 맵을 만들어 봅시다.
 
 http://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.html
 
-```ocaml
-exception TODO
+여러분이 완성해야 할 것은 다음과 같습니다.
 
-module StateOrder = 
-struct 
-  type t = Initial | Coined
-  let compare (x:t) (y:t) : int = raise TODO
-end
-
-module InputOrder = 
-struct 
-  type t = InsertCoin | PushCola | PushCider | PushReturn
-  let compare (x:t) (y:t) : int = raise TODO
-end
-
-module Output = 
-struct 
-  type t = Coin | Cola | Cider | Nothing
-end
-
-module Pair (M:Map.OrderedType) (N:Map.OrderedType) =
-struct 
-  type t = M.t * N.t
-  let compare (x:t) (y:t) : int = raise TODO
-end
-
-module StateInputOrder = Pair (StateOrder) (InputOrder)
-module FsmMap = Map.Make (StateInputOrder)
-
-let fsm = FsmMap.empty
-let fsm = FsmMap.add 
-  (StateOrder.Initial,InputOrder.InsertCoin) 
-  (StateOrder.Coined,Output.Nothing) 
-  fsm
-let fsm = FsmMap.add 
-  (StateOrder.Initial,InputOrder.PushCola)
-  (StateOrder.Initial,Output.Nothing)
-  fsm
-let fsm = FsmMap.add
-  (StateOrder.Initial,InputOrder.PushCider)
-  (StateOrder.Coined,Output.Nothing)
-  fsm
-let fsm = FsmMap.add
-  (StateOrder.Initial,InputOrder.PushReturn)
-  (StateOrder.Coined,Output.Nothing) 
-  fsm
-let fsm = FsmMap.add 
-  (StateOrder.Coined,InputOrder.InsertCoin)
-  (StateOrder.Coined,Output.Coin)
-  fsm
-let fsm = FsmMap.add 
-  (StateOrder.Coined,InputOrder.PushCola)
-  (StateOrder.Initial,Output.Cola) 
-  fsm
-let fsm = FsmMap.add
-  (StateOrder.Coined,InputOrder.PushCider)
-  (StateOrder.Initial,Output.Cider) 
-  fsm
-let fsm = FsmMap.add
-  (StateOrder.Coined,InputOrder.PushReturn)
-  (StateOrder.Initial,Output.Coin)
-  fsm
-
-let result1 = FsmMap.find (StateOrder.Initial,InputOrder.InsertCoin) fsm
-let result2 = FsmMap.find (StateOrder.Initial,InputOrder.PushCider) fsm
-let result3 = FsmMap.find (StateOrder.Coined,InputOrder.PushCola) fsm
-let result4 = FsmMap.find (StateOrder.Coined,InputOrder.InsertCoin) fsm
-let result5 = FsmMap.find (StateOrder.Coined,InputOrder.PushCider) fsm
-
-let _ =
-  if result1 = (StateOrder.Coined, Output.Nothing)
-  then print_endline "o"
-  else print_endline "x"
-let _ =
-  if result2 = (StateOrder.Coined, Output.Nothing)
-  then print_endline "o"
-  else print_endline "x"
-let _ =
-  if result3 = (StateOrder.Initial, Output.Cola)
-  then print_endline "o"
-  else print_endline "x"
-let _ =
-  if result4 = (StateOrder.Coined, Output.Coin)
-  then print_endline "o"
-  else print_endline "x"
-let _ =
-  if result5 = (StateOrder.Initial, Output.Cider)
-  then print_endline "o"
-  else print_endline "x"
-```
+1. `StateOrder`, `InputOrder`모듈: `compare`함수는 `Set.OrderedType`에
+정의되어 있는 `compare`와 동일.
+2. `Pair`모듈타입: `Map.OrderedType`모듈타입의 두 모듈을 받아 쌍의
+모듈 생성.
 
 ### 유한상태기계 ###
 
-유한상태기계를 모듈로 작성해 봅시다.  아래의 빈칸을 채우세요.
+위에서 작성한 `FsmMap`을 이용하여 유한상태기계모듈을 작성해 봅시다.
+여러분에 완성해야 할 것은 다음과 같습니다.
 
-```ocaml
-module type FsmType =
-sig
-  type t
-  val init : t
-  val add_rule : StateOrder.t -> InputOrder.t -> 
-    StateOrder.t -> Output.t -> t -> t
-  val step : StateOrder.t -> InputOrder.t -> t -> StateOrder.t * Output.t
-end
-
-module Fsm = 
-struct
-  type t = (StateOrder.t * Output.t) FsmMap.t
-  let init : t = FsmMap.empty
-  let add_rule (is:StateOrder.t) (i:InputOrder.t) 
-      (os:StateOrder.t) (o:Output.t) (fsm:t) : t =
-    raise TODO
-  let step (s:StateOrder.t) (i:InputOrder.t) (fsm:t) 
-      : StateOrder.t * Output.t =
-    raise TODO
-end
-
-module FsmRunMake (F:FsmType) =
-struct 
-  let rec run (s:StateOrder.t) (is:InputOrder.t list) (fsm:F.t) 
-      : StateOrder.t * Output.t list = 
-    raise TODO
-end
-
-module FsmRun = FsmRunMake (Fsm)
-
-let result = FsmRun.run StateOrder.Initial
-  [InputOrder.InsertCoin;InputOrder.PushCola;InputOrder.PushCider;
-   InputOrder.PushReturn;InputOrder.InsertCoin;InputOrder.PushCola;
-   InputOrder.PushCider;InputOrder.PushReturn] 
-  fsm
-
-let _ = 
-  if result = 
-    (StateOrder.Initial,
-     [Output.Nothing; Output.Cola; Output.Nothing; 
-      Output.Coin; Output.Nothing; Output.Cola; 
-      Output.Nothing; Output.Coin])
-  then print_endline "o"
-  else print_endline "x"
-```
+1. `Fsm`모듈: `FsmMap`을 이용하여 유한상태기계 생성.  `init`,
+`add_rule`, `step` 함수 정의.
+2. `FsmRun`모듈함수: `FsmType`모듈타입의 모듈을 인자로 받아 `run` 함수
+정의.
