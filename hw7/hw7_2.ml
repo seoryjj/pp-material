@@ -19,7 +19,7 @@ module SkiLiquid : SKI = struct
     | V of string (* varible *)
     | M of liquid * liquid (* mix of two liquids *)
 
-  let react: liquid -> liquid =
+  let rec react: liquid -> liquid =
     fun l ->
     raise ETODO
 

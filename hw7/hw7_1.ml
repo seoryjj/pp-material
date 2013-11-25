@@ -1,5 +1,7 @@
 (* TA's comment:
- * Functions print_tape and print_tm has different type from the direction.
+ * 1. Implement step_tm as well as run_tm.
+ *
+ * 2. Functions print_tape and print_tm has different type from the direction.
  * Follow the types in this skeleton code.
  *)
 
@@ -23,6 +25,7 @@ module type TM = sig
   val match_rule: state -> symbol -> ruletable -> todo * move * state
   (* main *)
   val make_tm: symbol list -> state list -> state -> ruletable -> tm
+  val step_tm: tm -> tm (* You should implement this. *)
   val run_tm: tm -> tm
   val print_tm: tm -> int -> string (* instead of tm -> int -> unit *)
 end
@@ -66,7 +69,6 @@ module TuringMachine : TM = struct
     fun tape size ->
     raise ETODO
 
-
   (* rule table part *)
   let match_rule: state -> symbol -> ruletable -> todo * move * state =
     fun st sym rules ->
@@ -78,9 +80,14 @@ module TuringMachine : TM = struct
     fun symbols states initial_state rules ->
     raise ETODO
 
-  let run_tm: tm -> tm =
+  let step_tm: tm -> tm =
     fun tm ->
     raise ETODO
+
+  let rec run_tm: tm -> tm =
+    fun tm ->
+    try run_tm (step_tm tm)
+    with Not_found -> tm
 
   let print_tm: tm -> int -> string = (* instead of tm -> int -> unit *)
     fun tm size ->
