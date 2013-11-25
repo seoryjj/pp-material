@@ -24,7 +24,8 @@ module type TM = sig
   (* rule table part *)
   val match_rule: state -> symbol -> ruletable -> todo * move * state
   (* main *)
-  val make_tm: symbol list -> state list -> state -> ruletable -> tm
+  val make_tm: symbol list -> state -> ruletable -> tm
+  (* instead of symbol list -> state list -> state -> ruletable -> tm *)
   val step_tm: tm -> tm (* You should implement this. *)
   val run_tm: tm -> tm
   val print_tm: tm -> int -> string (* instead of tm -> int -> unit *)
@@ -76,8 +77,9 @@ module TuringMachine : TM = struct
 
 
   (* main *)
-  let make_tm: symbol list -> state list -> state -> ruletable -> tm =
-    fun symbols states initial_state rules ->
+  let make_tm: symbol list -> state -> ruletable -> tm =
+    (* instead of symbol list -> state list -> state -> ruletable -> tm *)
+    fun symbols initial_state rules ->
     raise ETODO
 
   let step_tm: tm -> tm =

@@ -30,28 +30,34 @@ let _ = print_endline "Rule table"
 let table = 
   [("1","a",TuringMachine.Write "d",TuringMachine.Right,"2");
    ("2","b",TuringMachine.Write "e",TuringMachine.Right,"3");
-   ("3","-",TuringMachine.Write "f",TuringMachine.Right,"4");
-   ("4","e",TuringMachine.Write "g",TuringMachine.Right,"5");
-   ("5","d",TuringMachine.Write "h",TuringMachine.Right,"6");
-   ("6","-",TuringMachine.Write "i",TuringMachine.Right,"7")]
+   ("3","-",TuringMachine.Write "f",TuringMachine.Left,"4");
+   ("4","e",TuringMachine.Write "g",TuringMachine.Left,"5");
+   ("5","d",TuringMachine.Write "h",TuringMachine.Left,"6");
+   ("6","-",TuringMachine.Write "i",TuringMachine.Stay,"7")]
 
 let _ = output (fun () -> 
-  (TuringMachine.Write "d",TuringMachine.Right,"2") = match_rule "1" "a" table
+  (TuringMachine.Write "d",TuringMachine.Right,"2") = 
+    TuringMachine.match_rule "1" "a" table
 )
 let _ = output (fun () -> 
-  (TuringMachine.Write "e",TuringMachine.Right,"e") = match_rule "2" "b" table
+  (TuringMachine.Write "e",TuringMachine.Right,"3") = 
+    TuringMachine.match_rule "2" "b" table
 )
 let _ = output (fun () -> 
-  (TuringMachine.Write "f",TuringMachine.Left,"4") = match_rule "3" "-" table
+  (TuringMachine.Write "f",TuringMachine.Left,"4") = 
+    TuringMachine.match_rule "3" "-" table
 )
 let _ = output (fun () -> 
-  (TuringMachine.Write "g",TuringMachine.Right,"5") = match_rule "4" "e" table
+  (TuringMachine.Write "g",TuringMachine.Left,"5") = 
+    TuringMachine.match_rule "4" "e" table
 )
 let _ = output (fun () -> 
-  (TuringMachine.Write "h",TuringMachine.Right,"6") = match_rule "5" "d" table
+  (TuringMachine.Write "h",TuringMachine.Left,"6") = 
+    TuringMachine.match_rule "5" "d" table
 )
 let _ = output (fun () -> 
-  (TuringMachine.Write "i",TuringMachine.Right,"7") = match_rule "6" "-" table
+  (TuringMachine.Write "i",TuringMachine.Stay,"7") = 
+    TuringMachine.match_rule "6" "-" table
 )
 
 (* Turaing machine *)
