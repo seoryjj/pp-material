@@ -49,11 +49,11 @@ let _ =
   let _ = IntBubbleSort.sort (random_list 3000) in
   let e_time = Sys.time () in
   print_endline 
-    ("BubbleSort (4000): "^(string_of_float (e_time -. s_time))^"sec")
+    ("BubbleSort (3000): "^(string_of_float (e_time -. s_time))^"sec")
 
 let _ = 
   let s_time = Sys.time () in
-  let _ = IntMergeSort.sort (random_list 30000) in
+  let _ = IntMergeSort.sort (random_list 3000) in
   let e_time = Sys.time () in
   print_endline 
-    ("MergeSort (40000): "^(string_of_float (e_time -. s_time))^"sec")
+    ("MergeSort (3000): "^(string_of_float (e_time -. s_time))^"sec")

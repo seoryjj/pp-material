@@ -18,12 +18,16 @@ Merge sort 모듈함수를 만들어 보겠습니다.
   * a<=b이면 그대로 둔다.
 2. 리스트의 길이(원소의 개수)가 n일 때 n-1번만큼 1을 반복한다.
 
+[위키피디아](http://ko.wikipedia.org/wiki/%EA%B1%B0%ED%92%88_%EC%A0%95%EB%A0%AC)를 참조하세요.
+
 ### Merge sort
 
 1. 입력된 리스트를 균등하게 둘로 나눈다.
 2. 재귀적으로 sort함수를 호출하여 나누어진 두 리스트를 각각 정렬한다.
 3. 두 정렬된 리스트를 하나로 합친다.  이때 합쳐진 리스트도 정렬되어
 있을 수 있도록 한다.
+
+[위키피디아](http://ko.wikipedia.org/wiki/%ED%95%A9%EB%B3%91_%EC%A0%95%EB%A0%AC)를 참조하세요.
 
 ### 문제
 
@@ -84,14 +88,14 @@ let _ =
   let _ = IntBubbleSort.sort (random_list 3000) in
   let e_time = Sys.time () in
   print_endline 
-    ("BubbleSort (4000): "^(string_of_float (e_time -. s_time))^"sec")
+    ("BubbleSort (3000): "^(string_of_float (e_time -. s_time))^"sec")
 
 let _ = 
   let s_time = Sys.time () in
-  let _ = IntMergeSort.sort (random_list 30000) in
+  let _ = IntMergeSort.sort (random_list 3000) in
   let e_time = Sys.time () in
   print_endline 
-    ("MergeSort (40000): "^(string_of_float (e_time -. s_time))^"sec")
+    ("MergeSort (3000): "^(string_of_float (e_time -. s_time))^"sec")
 ```
 
 ## 예외
@@ -135,16 +139,15 @@ let _ = mydiv "3" "0"
 [exception_ex.ml](exception_ex.ml)
 
 ```ocaml
-let hd (x:int list) : int = 
-  List.hd x
-let _ = hd [1;2;3]
-let _ = hd []
+let print_nth (x:int list) (n:int) : unit = 
+  try 
+    print_endline ("nth element is "^(string_of_int (List.nth x n)))
+  with 
+    ...
 
-let nth (x:int list) (n:int) : int = 
-  List.nth x n 
-let _ = nth [1;2;3] 1
-let _ = nth [1;2;3] 5
-let _ = nth [1;2;3] (-1)
+let _ = print_nth [1;2;3] 1
+let _ = print_nth [1;2;3] 5
+let _ = print_nth [1;2;3] (-1)
 
 module IntOrder =
 struct
@@ -159,11 +162,15 @@ let m = IntMap.add 2 "two" m
 let m = IntMap.add 4 "four" m
 let m = IntMap.add 5 "five" m
 
-let find (i:int) (m:string IntMap.t) : string = 
-  IntMap.find i m
-let _ = find 1 m
-let _ = find 3 m
-let _ = find 5 m
+let print_find (i:int) (m:string IntMap.t) : unit = 
+  try
+    print_endline (IntMap.find i m)
+  with 
+    ...
+
+let _ = print_find 1 m
+let _ = print_find 3 m
+let _ = print_find 5 m
 
 let _ = print_endline "o"
 ```
