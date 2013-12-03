@@ -7,6 +7,7 @@ sig
   val box: box
   val rotate: box -> box                (* roatate box M to 3 to W to E *)
   val pp: box -> int * int -> unit      (* pretty printer *)
+  val size: int
 end
 
 module BasicFrame (Design: sig val design: design end): FRAME = 
@@ -21,6 +22,7 @@ struct
     | BOX (SE,x) -> ()                  (* dummy, fill it if you want *)
     | BOX (SW,x) -> ()                  (* dummy, fill it if you want *)
     | _ -> raise NON_BASIC_BOX
+  let size = 1
 end
 
 module Rotate (Box:FRAME) : FRAME =
@@ -28,9 +30,11 @@ struct
   let box = ...
   let rotate (b:box) : box = ...
   let pp b center = ()                  (* dummy, fill it if you want *)
+  let size = ...
 end
 
 module Glue (Nw:FRAME) (Ne:FRAME) (Se:FRAME) (Sw:FRAME) : FRAME =
-struct 
+struct
+  exception DIFFERENT_SIZED_BOXES
   ...
 end
