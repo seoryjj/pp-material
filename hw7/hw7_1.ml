@@ -22,11 +22,12 @@ module type TM = sig
   val move_tape_right: tape -> tape
   val print_tape: tape -> int -> string (* instead of tape -> unit *)
   (* rule table part *)
-  val match_rule: state -> symbol -> ruletable -> todo * move * state
+  val match_rule: state -> symbol -> ruletable -> (todo * move * state) option
+  (* instead of state -> symbol -> ruletable -> todo * move * state *)
   (* main *)
   val make_tm: symbol list -> state -> ruletable -> tm
   (* instead of symbol list -> state list -> state -> ruletable -> tm *)
-  val step_tm: tm -> tm (* You should implement this. *)
+  val step_tm: tm -> tm option (* You should implement this. *)
   val run_tm: tm -> tm
   val print_tm: tm -> int -> string (* instead of tm -> int -> unit *)
 end
@@ -71,7 +72,7 @@ module TuringMachine : TM = struct
     raise ETODO
 
   (* rule table part *)
-  let match_rule: state -> symbol -> ruletable -> todo * move * state =
+  let match_rule: state -> symbol -> ruletable -> (todo * move * state) option =
     fun st sym rules ->
     raise ETODO
 
@@ -82,14 +83,13 @@ module TuringMachine : TM = struct
     fun symbols initial_state rules ->
     raise ETODO
 
-  let step_tm: tm -> tm =
+  let step_tm: tm -> tm option =
     fun tm ->
     raise ETODO
 
   let rec run_tm: tm -> tm =
     fun tm ->
-    try run_tm (step_tm tm)
-    with Not_found -> tm
+    raise ETODO
 
   let print_tm: tm -> int -> string = (* instead of tm -> int -> unit *)
     fun tm size ->
